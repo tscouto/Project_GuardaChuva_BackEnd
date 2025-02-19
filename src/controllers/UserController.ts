@@ -88,10 +88,11 @@ class UserController {
       }
 
       // Validação do documento (CPF ou CNPJ)
-      if (profile === "DRIVER" && !cpf.isValid(document)) {
+      if (profile === "DRIVER" && !cpf.isValid(document) || profile === "ADMIN" && !cpf.isValid(document)) {
         res.status(400).json({ error: "CPF inválido." });
         return
       }
+      
       if (profile === "BRANCH" && !cnpj.isValid(document)) {
         res.status(400).json({ error: "CNPJ inválido." });
         return

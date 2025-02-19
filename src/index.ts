@@ -13,6 +13,7 @@ import { handleError } from "./middlewares/handleError";
 import authRouter from "./routes/auth.routes";
 import logger from "./config/winston";
 
+
 const app = express();
 
 app.use(cors()); // Permite que o express entenda requisições de outros domínios
@@ -21,6 +22,7 @@ app.use(express.json()); // Permite que o express entenda JSON
 
 app.use("/users", userRouter);
 app.use("/login", authRouter);
+app.use('/list', userRouter)
 
 app.get("/env", (req, res) => {
   res.json({

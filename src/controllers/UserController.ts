@@ -46,6 +46,7 @@ import { validate as isValidEmail } from "email-validator";
 import { Branch } from "../entities/Branches";
 import { Driver } from "../entities/Drivers";
 
+
 class UserController {
   private userRepository;
   private userDriverRepository;
@@ -92,7 +93,7 @@ class UserController {
         res.status(400).json({ error: "CPF inválido." });
         return
       }
-      
+
       if (profile === "BRANCH" && !cnpj.isValid(document)) {
         res.status(400).json({ error: "CNPJ inválido." });
         return
@@ -119,9 +120,9 @@ class UserController {
         document,
         full_address,
       });
-      
-        
-    
+
+
+
       let createdProfile;
 
       // Agora usamos o usuário recém-criado para criar um Driver ou Branch
@@ -132,8 +133,8 @@ class UserController {
           full_address,
           user: newUser, // Associando corretamente o usuário
         });
-       
-        
+
+
       } else if (profile === "BRANCH") {
         createdProfile = await this.userBranchRepository.save({
           name,
@@ -141,12 +142,12 @@ class UserController {
           full_address,
           user: newUser, // Associando corretamente o usuário
         });
-       
-        
+
+
       }
       console.log(createdProfile, newUser)
-       res.status(201).json(createdProfile || newUser)
-       return
+      res.status(201).json(createdProfile || newUser)
+      return
 
 
     } catch (error) {
@@ -155,6 +156,25 @@ class UserController {
       return
     }
   };
-}
+  listaUsuarios =  async (req: Request, res: Response) => {
+    try {
+      // Buscar todos os usuários da tabela User
+      const users = await this.userRepository.find();
 
+      // Buscar todos os registros da tabela Branch
+      const branches = await this.userBranchRepository.find();
+
+      // Buscar todos os registros da tabela Driver
+      const drivers = await this.userDriverRepository.find();
+
+      // Combinar os resultados em um único array
+      const combinedResults = [...users, ...branches, ...drivers];
+
+      res.status(200).json(combinedResults);
+    } catch (ex) {
+      console.error(ex);
+      res.status(500).send("Ocorreu um erro ao executar a solicitação");
+    }
+  }
+}
 export default UserController;

@@ -1,8 +1,8 @@
 class PayloadJwt {
-  firstName: string;
+  name: string;
   email: string;
   userId: number;
-  roles: string;
+  profile: string;
 }
 
 export default PayloadJwt

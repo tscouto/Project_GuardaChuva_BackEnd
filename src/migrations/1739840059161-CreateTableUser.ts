@@ -46,16 +46,7 @@ export class CreateTableUser1739840059161 implements MigrationInterface {
                         type: "boolean",
                         default: true,
                     },
-                    {
-                        name: "preparation_time",
-                        type: "time",
-                        isNullable: false,
-                    },
-                    {
-                        name: "is_fitness",
-                        type: "boolean",
-                        default: false,
-                    },
+                    
                     {
                         name: "created_at",
                         type: "timestamp",

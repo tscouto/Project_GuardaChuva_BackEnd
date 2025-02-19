@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 import { User } from "./User";
 
 @Entity("drivers")
@@ -13,6 +13,7 @@ export class Driver {
   document: string;
 
   @ManyToOne(() => User, (user) => user.id, { nullable: false })
+  @JoinColumn({ name: "user_id" }) // Garante que a coluna no banco será "user_id"
   user: User;
 
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })

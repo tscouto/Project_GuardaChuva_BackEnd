@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Branch } from "./Branches";
+import { Driver } from "./Drivers";
 require('dotenv').config();
 
 @Entity("users")
@@ -26,4 +28,9 @@ export class User {
 
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP", onUpdate: "CURRENT_TIMESTAMP" })
   updated_at: Date;
+  @OneToMany(() => Branch, (branch) => branch.user)
+branches: Branch[];
+
+@OneToMany(() => Driver, (driver) => driver.user)
+drivers: Driver[];
 }

@@ -3,6 +3,8 @@ import UserController from "../controllers/UserController";
 
 const userRouter = Router();
 
-// userRouter.post("/users",UserController.create);
+const userController = new UserController();
+
+userRouter.post("/",userController.create);
 
 export default userRouter;

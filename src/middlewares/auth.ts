@@ -80,7 +80,7 @@ export interface AuthRequest extends Request {
 export const verifyToken = (listaPermissoes: string[], req: AuthRequest, res: Response, next: NextFunction) => {
   try {
     const token = req.headers.authorization?.split(" ")[1] ?? "";
-
+    
     if (!token) {
       res.status(401).json("Token inválido!");
       return;
@@ -88,19 +88,14 @@ export const verifyToken = (listaPermissoes: string[], req: AuthRequest, res: Re
 
     const payload = jwt.verify(token, process.env.JWT_SECRET ?? "") as dataJwt;
 
-    const roles = payload.roles;
+    const profile = payload.profile;
 
     let hasPermission = false;
 
-    if (roles.includes("ADMIN")) {
+    if (listaPermissoes.includes(profile) ) {
       hasPermission = true;
-    } else {
-      roles.forEach((role) => {
-        if (listaPermissoes.includes(role)) {
-          hasPermission = true;
-        }
-      });
-    }
+    } 
+
 
     if (!hasPermission) {
       res.status(401).json({ message: "Usuário não possui autorização para acessar este recurso!" });
@@ -120,3 +115,5 @@ export const verifyToken = (listaPermissoes: string[], req: AuthRequest, res: Re
 };
 
 export default verifyToken;
+
+

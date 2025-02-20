@@ -23,6 +23,7 @@ app.use(express.json()); // Permite que o express entenda JSON
 app.use("/users", userRouter);
 app.use("/login", authRouter);
 app.use('/list', userRouter)
+app.use('/list/:id', userRouter)
 
 app.get("/env", (req, res) => {
   res.json({

@@ -45,6 +45,11 @@ import { cpf, cnpj } from "cpf-cnpj-validator";
 import { validate as isValidEmail } from "email-validator";
 import { Branch } from "../entities/Branches";
 import { Driver } from "../entities/Drivers";
+import { In } from "typeorm";
+import jwt from "jsonwebtoken"
+interface UserRequest extends Request {
+  usuario?: { id: number; profile: "ADMIN" | "DRIVER" }; // Tipando o perfil como "ADMIN" ou "DRIVER"
+}
 
 
 class UserController {
@@ -156,22 +161,24 @@ class UserController {
       return
     }
   };
+
+
   listaUsuarios = async (req: Request, res: Response) => {
 
     try {
       let profileFilter = req.query.profile
       let users = []
       // Buscar todos os usuários da tabela User
-      if( profileFilter!== null){
+      if (profileFilter !== null) {
         users = await this.userRepository.find({
           where: {
             profile: profileFilter as "ADMIN" || "BRANCH" || "DRIVER"
           }
         });
-      }else {
+      } else {
         users = await this.userRepository.find();
       }
-       
+
 
       // Buscar todos os registros da tabela Branch
       const branches = await this.userBranchRepository.find();
@@ -188,5 +195,44 @@ class UserController {
       res.status(500).send("Ocorreu um erro ao executar a solicitação");
     }
   }
+  listUsarioId = async (req: Request, res: Response) => {
+    const token = req.headers.authorization?.split(" ")[1]
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as { id: number; profile: "ADMIN" | "DRIVER" }
+    req.usuario = decoded
+    try {
+
+      
+
+      if (!token) {
+        res.status(401).json({ message: "Token não fornecido" });
+        return
+
+      }
+
+
+      const userId = Number(req.params.id);
+      if (isNaN(userId)) {
+        res.status(400).json({ message: "ID inválido" });
+        return
+      }
+
+      const user = await this.userRepository.findOne({
+        where: { id: userId },
+        select: ["id", "name", "status", "full_address", "profile"],
+      });
+
+      if (!user) {
+        res.status(404).json({ message: "Usuário não encontrado!" });
+        return
+      }
+
+      res.status(200).json(user);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Erro ao processar requisição" });
+    }
+  };
+
+
 }
 export default UserController;

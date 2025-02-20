@@ -29,8 +29,8 @@ export class User {
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP", onUpdate: "CURRENT_TIMESTAMP" })
   updated_at: Date;
   @OneToMany(() => Branch, (branch) => branch.user)
-branches: Branch[];
+  branches: Branch[];
 
-@OneToMany(() => Driver, (driver) => driver.user)
-drivers: Driver[];
+  @OneToMany(() => Driver, (driver) => driver.user)
+  drivers: Driver[];
 }

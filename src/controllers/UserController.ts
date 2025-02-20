@@ -156,10 +156,22 @@ class UserController {
       return
     }
   };
-  listaUsuarios =  async (req: Request, res: Response) => {
+  listaUsuarios = async (req: Request, res: Response) => {
+
     try {
+      let profileFilter = req.query.profile
+      let users = []
       // Buscar todos os usuários da tabela User
-      const users = await this.userRepository.find();
+      if( profileFilter!== null){
+        users = await this.userRepository.find({
+          where: {
+            profile: profileFilter as "ADMIN" || "BRANCH" || "DRIVER"
+          }
+        });
+      }else {
+        users = await this.userRepository.find();
+      }
+       
 
       // Buscar todos os registros da tabela Branch
       const branches = await this.userBranchRepository.find();

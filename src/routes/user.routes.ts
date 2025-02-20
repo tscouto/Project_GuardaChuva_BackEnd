@@ -13,12 +13,15 @@
 import { Router } from "express";
 import UserController from "../controllers/UserController";
 import authRouter from "./auth.routes";
-import { verifyToken, AuthRequest } from "../middlewares/auth";
+import verifyToken from "../middlewares/auth";
+import { AuthRequest } from "../middlewares/auth";
 const userRouter = Router();
 
 const userController = new UserController();
 
 userRouter.post("/", userController.create);
-userRouter.use("/auth", authRouter); // Alterado de .post para .use
-userRouter.get("/", (req, res, next) => verifyToken(['ADMIN'], req as AuthRequest, res, next), userController.listaUsuarios);
+userRouter.post("/login", authRouter); // Alterado de .post para .use
+
+userRouter.get("/", (req, res, next) => verifyToken(["ADMIN"], req as AuthRequest, res, next), userController.listaUsuarios);
+
 export default userRouter;

@@ -3,7 +3,8 @@ import { AppDataSource } from "../data-source";
 import jwt from "jsonwebtoken"
 import { User } from "../entities/User";
 import bcrypt from "bcrypt"
-import PayloadJwt from "../classes/PayloadJWT";
+import PayloadJwt from "../classes/PayloadJwt";
+// import PayloadJwt from "../classes/PayloadJWT";
 
 const authRouter = Router()
 
@@ -16,11 +17,16 @@ authRouter.post("/", async (req: Request, res: Response) => {
         const user = await userRepository.findOne({
             where: {
                 email: userBody.email,
-                password_hash:userBody.password
+                password_hash: userBody.password
             }
-        }) 
-          
-        if(!user){
+        })
+
+        if (!userBody.email || !userBody.password_hash) {
+            res.status(400).json({ error: "Todos os campos obrigatórios devem ser preenchidos." });
+            return
+        }
+
+        if (!user) {
             res.status(401).json("Usuário e/ou senha incorreta!")
             return
         }
@@ -29,16 +35,17 @@ authRouter.post("/", async (req: Request, res: Response) => {
 
         const chaveSecretaJwt = process.env.JWT_SECRET ?? ""
 
-        // const payload = {
-        //     email: user.email,
-        //     firstName: user.name,
-        //     userId: user.id,
-        // } as PayloadJwt
-        
-        const token = await jwt.sign(userBody, chaveSecretaJwt, {expiresIn: '1h'})
+        const payload = {
+            email: user.email,
+            name: user.name,
+            userId: user.id,
+            profile: user.profile
+        } as PayloadJwt
 
-        if(valido){
-            res.status(200).json({name:user.name, token: token})
+        const token = await jwt.sign(payload, chaveSecretaJwt, { expiresIn: '1h' })
+
+        if (valido) {
+            res.status(200).json({ name: user.name, token: token })
 
             return
         } else {
@@ -46,7 +53,7 @@ authRouter.post("/", async (req: Request, res: Response) => {
             return
         }
 
-    } catch (ex){
+    } catch (ex) {
         res.status(500).json("Não foi possível executar a solicitação!")
     }
 })

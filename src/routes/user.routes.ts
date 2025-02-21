@@ -23,5 +23,6 @@ userRouter.post("/", userController.create);
 userRouter.post("/login", authRouter); // Alterado de .post para .use
 userRouter.get("/", (req, res, next) => verifyToken(["ADMIN"], req as AuthRequest, res, next), userController.listaUsuarios);
 userRouter.get("/:id", (req, res, next) => verifyToken(["ADMIN", "DRIVER"], req as AuthRequest, res, next), userController.listUsarioId);
+userRouter.patch("/:id", (req, res, next) => verifyToken(["ADMIN", "DRIVER"], req as AuthRequest, res, next), userController.updateUser);
 
 export default userRouter;

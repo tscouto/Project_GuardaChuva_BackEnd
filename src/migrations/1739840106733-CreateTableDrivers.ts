@@ -54,11 +54,6 @@ export class CreateTableDrivers1739840106733 implements MigrationInterface {
             })
         );
 
-          await queryRunner.createForeignKey("driver", new TableForeignKey({
-                    columnNames: ["user_id"],
-                    referencedTableName: "users",
-                    referencedColumnNames: ["id"]
-                }));
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {

@@ -51,14 +51,10 @@ export class CreateTableBranches1739840083396 implements MigrationInterface {
                         referencedColumnNames: ["id"],
                     },
                 ],
+                
             })
         );
 
-          await queryRunner.createForeignKey("branches", new TableForeignKey({
-                    columnNames: ["user_id"],
-                    referencedTableName: "users",
-                    referencedColumnNames: ["id"]
-                }));
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {

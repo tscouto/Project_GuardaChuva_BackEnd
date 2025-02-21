@@ -12,7 +12,7 @@ export class Driver {
   @Column({ length: 30, unique: true })
   document: string;
 
-  @ManyToOne(() => User, (user) => user.id, { nullable: false })
+  @ManyToOne(() => User, (user) => user.drivers, { nullable: false })
   @JoinColumn({ name: "user_id" }) // Garante que a coluna no banco será "user_id"
   user: User;
 

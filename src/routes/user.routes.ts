@@ -10,7 +10,7 @@
 // userRouter.post("/", authRouter)
 // userRouter.get("/", verifyToken(['ADMIN']), userController.listaUsuarios);
 // export default userRouter;
-import { Router } from "express";
+import { RequestHandler, Router } from "express";
 import UserController from "../controllers/UserController";
 import authRouter from "./auth.routes";
 import verifyToken from "../middlewares/auth";

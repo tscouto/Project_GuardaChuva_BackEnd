@@ -526,59 +526,63 @@ class UserController {
   }
   updateStatusUsuario = async (req: Request, res: Response) => {
     try {
+      const { id } = req.params;
+      const { status } = req.body;
 
-      const token = req.headers.authorization?.split(" ")[1]
-      const paramsid = Number(req.params.id)
-      const bodyUpdate = req.body;
-
+      // Verificar token de autorização
+      const token = req.headers.authorization?.split(" ")[1];
       if (!token) {
-        res.status(401).json("Token inválido!");
+        res.status(401).json({ message: "Token inválido!" });
         return;
       }
 
+      // Decodificar token
       const decoded = jwt.verify(token, process.env.JWT_SECRET ?? "") as dataJwt;
 
-
-      if (isNaN(paramsid)) {
+      // Verificar se o ID do usuário é válido
+      if (isNaN(Number(id))) {
         res.status(400).json({ message: "ID inválido" });
-        return
+        return;
       }
 
-      const user = await this.userRepository.findOne({
-        where: { id: paramsid },
-      });
-
-      console.log(user)
-      console.log(paramsid)
-
+      // Verificar se o usuário existe
+      const user = await this.userRepository.findOne({ where: { id: Number(id) } });
       if (!user) {
         res.status(404).json({ message: "Usuário não encontrado" });
         return;
       }
 
-      if (decoded.profile === 'ADMIN') {
-        await this.userRepository.update(paramsid, bodyUpdate);
-        res.status(200).json({ message: "Usuário atualizado com sucesso!", bodyUpdate });
-        return;
-
-      }
-      if (decoded.profile === "DRIVER" && Number(decoded.userId) === paramsid) {
-        await this.userRepository.update(paramsid, bodyUpdate);
-        res.status(200).json({ message: "Perfil atualizado com sucesso!", bodyUpdate });
-        return;
+      // Bloquear campos proibidos na atualização
+      const forbiddenFields = ["id", "created_at", "updated_at", "profile", "name", "password_hash", "email"];
+      for (const field of forbiddenFields) {
+        if (req.body[field] !== undefined) {
+          res.status(401).json({ message: `Campo '${field}' não pode ser atualizado` });
+          return;
+        }
       }
 
-      if (!user) {
-        res.status(404).json({ message: "Usuário não encontrado" });
+      if (decoded.profile === "ADMIN") {
+        user.status = status;
+        await this.userRepository.save(user);
+        res.status(200).json({ message: "Status do usuário atualizado com sucesso!" , user: {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          status: user.status,
+          profile: user.profile,
+          created_at: user.created_at,
+          updated_at: user.updated_at
+      }});
         return;
       }
 
-      res.status(403).json({ message: "Acesso negado" }); // Se não for ADMIN ou DRIVER válido
-
+      res.status(403).json({ message: "Acesso negado" });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: "Erro ao processar requisição" });
+      return;
     }
-  }
+  };
+
 }
 export default UserController;

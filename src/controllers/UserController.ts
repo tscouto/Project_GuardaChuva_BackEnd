@@ -37,7 +37,7 @@
 // export default UserController;
 
 
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { AppDataSource } from "../data-source";
 import { User } from "../entities/User";
 import bcrypt from "bcryptjs";
@@ -46,10 +46,9 @@ import { validate as isValidEmail } from "email-validator";
 import { Branch } from "../entities/Branches";
 import { Driver } from "../entities/Drivers";
 import { In } from "typeorm";
-import jwt from "jsonwebtoken"
-interface UserRequest extends Request {
-  usuario?: { id: number; profile: "ADMIN" | "DRIVER" }; // Tipando o perfil como "ADMIN" ou "DRIVER"
-}
+import jwt, { JwtPayload } from "jsonwebtoken"
+
+type dataJwt = JwtPayload & { userId: string; roles: string[] };
 
 
 class UserController {
@@ -195,38 +194,62 @@ class UserController {
       res.status(500).send("Ocorreu um erro ao executar a solicitação");
     }
   }
-  listUsarioId = async (req: Request, res: Response) => {
-    const token = req.headers.authorization?.split(" ")[1]
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as { id: number; profile: "ADMIN" | "DRIVER" }
-    req.usuario = decoded
+  listUsarioId = async (req: Request, res: Response, next: NextFunction) => {
+
+
     try {
 
-      
+      const token = req.headers.authorization?.split(" ")[1]
+      const paramsid = Number(req.params.id)
 
       if (!token) {
-        res.status(401).json({ message: "Token não fornecido" });
-        return
-
+        res.status(401).json("Token inválido!");
+        return;
       }
 
+      const decoded = jwt.verify(token, process.env.JWT_SECRET ?? "") as dataJwt;
 
-      const userId = Number(req.params.id);
-      if (isNaN(userId)) {
+
+      if (isNaN(paramsid)) {
         res.status(400).json({ message: "ID inválido" });
         return
       }
 
-      const user = await this.userRepository.findOne({
-        where: { id: userId },
-        select: ["id", "name", "status", "full_address", "profile"],
-      });
-
-      if (!user) {
-        res.status(404).json({ message: "Usuário não encontrado!" });
-        return
+      if (decoded.profile === 'ADMIN') {
+        next();
+        return;
+      }
+      if (decoded.profile === "DRIVER" && Number(decoded.userId) === paramsid) {
+        // Busca SOMENTE o usuário com ID igual ao do token
+        const user = await this.userRepository.findOne({
+          where: { id: paramsid },
+        });
+  
+        if (!user) {
+          res.status(404).json({ message: "Usuário não encontrado" });
+          return;
+        }
+  
+        res.status(200).json(user); // Retorna os dados do próprio usuário
+        return;
       }
 
-      res.status(200).json(user);
+      // if (decoded.profile === "DRIVER" && Number(decoded.id) === paramsid) {
+      //   const user = await this.userRepository.findOne({
+      //     where: { id: paramsid },
+      //   });
+
+      //   if (!user) {
+      //     res.status(404).json({ message: "Usuário não encontrado" });
+      //     return;
+      //   }
+
+      //   res.status(200).json(user); // Retorna os dados do usuário específico
+      //   return;
+      // }
+
+      res.status(403).json({ message: "Acesso negado" }); // Se não for ADMIN ou DRIVER válido
+
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: "Erro ao processar requisição" });

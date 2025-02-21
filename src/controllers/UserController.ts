@@ -324,7 +324,8 @@ class UserController {
       // Verificar token de autorização
       const token = req.headers.authorization?.split(" ")[1];
       if (!token) {
-        return res.status(401).json({ message: "Token inválido!" });
+        res.status(401).json({ message: "Token inválido!" });
+        return
       }
 
       // Decodificar token
@@ -332,20 +333,23 @@ class UserController {
 
       // Verificar se o ID do usuário é válido
       if (isNaN(Number(id))) {
-        return res.status(400).json({ message: "ID inválido" });
+        res.status(400).json({ message: "ID inválido" });
+        return
       }
 
       // Verificar se o usuário existe
       const user = await this.userRepository.findOne({ where: { id: Number(id) } });
       if (!user) {
-        return res.status(404).json({ message: "Usuário não encontrado" });
+        res.status(404).json({ message: "Usuário não encontrado" });
+        return
       }
 
       // Bloquear campos proibidos na atualização
       const forbiddenFields = ["id", "created_at", "updated_at", "status", "profile"];
       for (const field of forbiddenFields) {
         if (bodyUpdate[field] !== undefined) {
-          return res.status(401).json({ message: `Campo '${field}' não pode ser atualizado` });
+          res.status(401).json({ message: `Campo '${field}' não pode ser atualizado` });
+          return
         }
       }
 
@@ -369,13 +373,13 @@ class UserController {
       // if (decoded.profile === "ADMIN") {
       //   const userUpdate: Partial<User> = {};
       //   const driverUpdate: Partial<Driver> = {};
-    
+
       //   if (bodyUpdate.name) userUpdate.name = bodyUpdate.name;
       //   if (bodyUpdate.email) userUpdate.email = bodyUpdate.email;
       //   if (bodyUpdate.password_hash) userUpdate.password_hash = bodyUpdate.password_hash;
-    
+
       //   await this.userRepository.update(id, userUpdate);
-    
+
       //   // Verificar se o usuário sendo atualizado tem o perfil DRIVER
       //   if (user.profile === "DRIVER" && bodyUpdate.full_address) {
       //       driverUpdate.full_address = bodyUpdate.full_address;
@@ -384,7 +388,7 @@ class UserController {
       //           await this.userDriverRepository.update(driver.id, driverUpdate);
       //       }
       //   }
-    
+
 
       //   return res.status(200).json({ message: "Usuário atualizado com sucesso!", userUpdate });
       // }
@@ -412,109 +416,169 @@ class UserController {
       if (decoded.profile === "ADMIN") {
         const userUpdate: Partial<User> = {};
         const driverUpdate: Partial<Driver> = {};
-    
+
         if (bodyUpdate.name) userUpdate.name = bodyUpdate.name;
         if (bodyUpdate.email) userUpdate.email = bodyUpdate.email;
         if (bodyUpdate.password_hash) userUpdate.password_hash = bodyUpdate.password_hash;
-    
+
         await this.userRepository.update(id, userUpdate);
-    
+
         // Verificar se o usuário sendo atualizado tem o perfil DRIVER
         if (user.profile === "DRIVER" && bodyUpdate.full_address) {
-            driverUpdate.full_address = bodyUpdate.full_address;
-            const driver = await this.userDriverRepository.findOne({ where: { user: { id: Number(id) } } });
-            if (driver) {
-                await this.userDriverRepository.update(driver.id, driverUpdate);
-            }
-            return res.status(200).json({ message: "Usuário atualizado com sucesso!", userUpdate, driverUpdate });
+          driverUpdate.full_address = bodyUpdate.full_address;
+          const driver = await this.userDriverRepository.findOne({ where: { user: { id: Number(id) } } });
+          if (driver) {
+            await this.userDriverRepository.update(driver.id, driverUpdate);
+          }
+          res.status(200).json({ message: "Usuário atualizado com sucesso!", userUpdate, driverUpdate });
+          return
         }
-    
-        return res.status(200).json({ message: "Usuário atualizado com sucesso!", userUpdate });
-    }
-    
-    if (decoded.profile === "DRIVER" && Number(decoded.userId) === Number(id)) {
+
+        res.status(200).json({ message: "Usuário atualizado com sucesso!", userUpdate });
+        return
+      }
+
+      if (decoded.profile === "DRIVER" && Number(decoded.userId) === Number(id)) {
         const driverUpdate: Partial<Driver> = {};
         const userUpdate: Partial<User> = {};
-    
+
         if (bodyUpdate.name) userUpdate.name = bodyUpdate.name;
         if (bodyUpdate.email) userUpdate.email = bodyUpdate.email;
         if (bodyUpdate.password_hash) userUpdate.password_hash = bodyUpdate.password_hash;
         if (bodyUpdate.full_address) driverUpdate.full_address = bodyUpdate.full_address;
-    
-        await this.userRepository.update(id, userUpdate);
-    
-        if (Object.keys(driverUpdate).length > 0) {
-            const driver = await this.userDriverRepository.findOne({ where: { user: { id: Number(id) } } });
-            if (driver) {
-                await this.userDriverRepository.update(driver.id, driverUpdate);
-            }
-        }
-    
-        return res.status(200).json({ message: "Perfil atualizado com sucesso!", userUpdate, driverUpdate });
-    }
 
-      return res.status(403).json({ message: "Acesso negado" });
+        await this.userRepository.update(id, userUpdate);
+
+        if (Object.keys(driverUpdate).length > 0) {
+          const driver = await this.userDriverRepository.findOne({ where: { user: { id: Number(id) } } });
+          if (driver) {
+            await this.userDriverRepository.update(driver.id, driverUpdate);
+          }
+        }
+
+        res.status(200).json({ message: "Perfil atualizado com sucesso!", userUpdate, driverUpdate });
+        return
+      }
+
+      res.status(403).json({ message: "Acesso negado" });
     } catch (error) {
       console.error(error);
-      return res.status(500).json({ message: "Erro ao processar requisição" });
+      res.status(500).json({ message: "Erro ao processar requisição" });
+      return
     }
 
 
-  // try {
-  //   const { id } = req.params;
-  //   const bodyUpdate = req.body;
+    // try {
+    //   const { id } = req.params;
+    //   const bodyUpdate = req.body;
 
-  //   // Verificar token de autorização
-  //   const token = req.headers.authorization?.split(" ")[1];
-  //   if (!token) {
-  //     return res.status(401).json({ message: "Token inválido!" });
-  //   }
+    //   // Verificar token de autorização
+    //   const token = req.headers.authorization?.split(" ")[1];
+    //   if (!token) {
+    //     return res.status(401).json({ message: "Token inválido!" });
+    //   }
 
-  //   // Decodificar token
-  //   const decoded = jwt.verify(token, process.env.JWT_SECRET ?? "") as dataJwt;
+    //   // Decodificar token
+    //   const decoded = jwt.verify(token, process.env.JWT_SECRET ?? "") as dataJwt;
 
-  //   // Verificar se o ID do usuário é válido
-  //   if (isNaN(Number(id))) {
-  //     return res.status(400).json({ message: "ID inválido" });
-  //   }
+    //   // Verificar se o ID do usuário é válido
+    //   if (isNaN(Number(id))) {
+    //     return res.status(400).json({ message: "ID inválido" });
+    //   }
 
-  //   // Verificar se o usuário existe
-  //   const user = await this.userRepository.findOne({ where: { id: Number(id) } });
-  //   if (!user) {
-  //     return res.status(404).json({ message: "Usuário não encontrado" });
-  //   }
+    //   // Verificar se o usuário existe
+    //   const user = await this.userRepository.findOne({ where: { id: Number(id) } });
+    //   if (!user) {
+    //     return res.status(404).json({ message: "Usuário não encontrado" });
+    //   }
 
-  //   // Bloquear campos proibidos na atualização
-  //   const forbiddenFields = ["id", "created_at", "updated_at", "status", "profile"];
-  //   for (const field of forbiddenFields) {
-  //     if (bodyUpdate[field] !== undefined) {
-  //       return res.status(401).json({ message: `Campo '${field}' não pode ser atualizado` });
-  //     }
-  //   }
+    //   // Bloquear campos proibidos na atualização
+    //   const forbiddenFields = ["id", "created_at", "updated_at", "status", "profile"];
+    //   for (const field of forbiddenFields) {
+    //     if (bodyUpdate[field] !== undefined) {
+    //       return res.status(401).json({ message: `Campo '${field}' não pode ser atualizado` });
+    //     }
+    //   }
 
-  //   // Atualizar informações
-  //   const userUpdate: Partial<User> = {};
-  //   if (bodyUpdate.name) userUpdate.name = bodyUpdate.name;
-  //   if (bodyUpdate.email) userUpdate.email = bodyUpdate.email;
-  //   if (bodyUpdate.password_hash) userUpdate.password_hash = bodyUpdate.password_hash;
+    //   // Atualizar informações
+    //   const userUpdate: Partial<User> = {};
+    //   if (bodyUpdate.name) userUpdate.name = bodyUpdate.name;
+    //   if (bodyUpdate.email) userUpdate.email = bodyUpdate.email;
+    //   if (bodyUpdate.password_hash) userUpdate.password_hash = bodyUpdate.password_hash;
 
-  //   await this.userRepository.update(id, userUpdate);
+    //   await this.userRepository.update(id, userUpdate);
 
-  //   // Se o perfil do usuário sendo atualizado for DRIVER, atualizar também full_address na tabela Driver
-  //   if (user.profile === "DRIVER" && bodyUpdate.full_address) {
-  //     const driverUpdate: Partial<Driver> = { full_address: bodyUpdate.full_address };
+    //   // Se o perfil do usuário sendo atualizado for DRIVER, atualizar também full_address na tabela Driver
+    //   if (user.profile === "DRIVER" && bodyUpdate.full_address) {
+    //     const driverUpdate: Partial<Driver> = { full_address: bodyUpdate.full_address };
 
-  //     const driver = await this.userDriverRepository.findOne({ where: { user: { id: Number(id) } } });
-  //     if (driver) {
-  //       await this.userDriverRepository.update(driver.id, driverUpdate);
-  //     }
-  //   }
+    //     const driver = await this.userDriverRepository.findOne({ where: { user: { id: Number(id) } } });
+    //     if (driver) {
+    //       await this.userDriverRepository.update(driver.id, driverUpdate);
+    //     }
+    //   }
 
-  //   return res.status(200).json({ message: "Usuário atualizado com sucesso!", userUpdate });
-  // } catch (error) {
-  //   console.error(error);
-  //   return res.status(500).json({ message: "Erro ao processar requisição" });
-  // }
-}
+    //   return res.status(200).json({ message: "Usuário atualizado com sucesso!", userUpdate });
+    // } catch (error) {
+    //   console.error(error);
+    //   return res.status(500).json({ message: "Erro ao processar requisição" });
+    // }
+  }
+  updateStatusUsuario = async (req: Request, res: Response) => {
+    try {
+
+      const token = req.headers.authorization?.split(" ")[1]
+      const paramsid = Number(req.params.id)
+      const bodyUpdate = req.body;
+
+      if (!token) {
+        res.status(401).json("Token inválido!");
+        return;
+      }
+
+      const decoded = jwt.verify(token, process.env.JWT_SECRET ?? "") as dataJwt;
+
+
+      if (isNaN(paramsid)) {
+        res.status(400).json({ message: "ID inválido" });
+        return
+      }
+
+      const user = await this.userRepository.findOne({
+        where: { id: paramsid },
+      });
+
+      console.log(user)
+      console.log(paramsid)
+
+      if (!user) {
+        res.status(404).json({ message: "Usuário não encontrado" });
+        return;
+      }
+
+      if (decoded.profile === 'ADMIN') {
+        await this.userRepository.update(paramsid, bodyUpdate);
+        res.status(200).json({ message: "Usuário atualizado com sucesso!", bodyUpdate });
+        return;
+
+      }
+      if (decoded.profile === "DRIVER" && Number(decoded.userId) === paramsid) {
+        await this.userRepository.update(paramsid, bodyUpdate);
+        res.status(200).json({ message: "Perfil atualizado com sucesso!", bodyUpdate });
+        return;
+      }
+
+      if (!user) {
+        res.status(404).json({ message: "Usuário não encontrado" });
+        return;
+      }
+
+      res.status(403).json({ message: "Acesso negado" }); // Se não for ADMIN ou DRIVER válido
+
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Erro ao processar requisição" });
+    }
+  }
 }
 export default UserController;

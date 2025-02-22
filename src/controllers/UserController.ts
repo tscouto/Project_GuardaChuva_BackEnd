@@ -3,6 +3,7 @@
 // import { User } from "../entities/User";
 // import bcrypt from 'bcryptjs'
 
+
 // class UserController {
 //   private userRepository
 
@@ -216,7 +217,10 @@ class UserController {
       }
 
       if (decoded.profile === 'ADMIN') {
-        next();
+        const user = await this.userRepository.findOne({
+          where: { id: paramsid },
+        });
+        res.status(200).json(user);
         return;
       }
       if (decoded.profile === "DRIVER" && Number(decoded.userId) === paramsid) {
@@ -233,7 +237,7 @@ class UserController {
         res.status(200).json(user); // Retorna os dados do próprio usuário
         return;
       }
-
+      /*
       // if (decoded.profile === "DRIVER" && Number(decoded.id) === paramsid) {
       //   const user = await this.userRepository.findOne({
       //     where: { id: paramsid },
@@ -247,7 +251,7 @@ class UserController {
       //   res.status(200).json(user); // Retorna os dados do usuário específico
       //   return;
       // }
-
+      */
       res.status(403).json({ message: "Acesso negado" }); // Se não for ADMIN ou DRIVER válido
 
     } catch (error) {
@@ -564,15 +568,17 @@ class UserController {
       if (decoded.profile === "ADMIN") {
         user.status = status;
         await this.userRepository.save(user);
-        res.status(200).json({ message: "Status do usuário atualizado com sucesso!" , user: {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          status: user.status,
-          profile: user.profile,
-          created_at: user.created_at,
-          updated_at: user.updated_at
-      }});
+        res.status(200).json({
+          message: "Status do usuário atualizado com sucesso!", user: {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            status: user.status,
+            profile: user.profile,
+            created_at: user.created_at,
+            updated_at: user.updated_at
+          }
+        });
         return;
       }
 

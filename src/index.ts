@@ -25,6 +25,11 @@ app.use("/login", authRouter);
 app.use('/list', userRouter)
 app.use('/list/:id', userRouter)
 app.use('/user', userRouter);
+
+app.use('/product', userRouter)
+
+
+
 app.get("/env", (req, res) => {
   res.json({
     port: process.env.PORT,

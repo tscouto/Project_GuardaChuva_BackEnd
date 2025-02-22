@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn, JoinColumn } from 'typeorm';
 import { Branch } from './Branches';
+require('dotenv').config();
 
 @Entity('products')
 export class Product {
@@ -19,6 +20,7 @@ export class Product {
   url_cover: string;
 
   @ManyToOne(() => Branch, branch => branch.id, { nullable: false })
+  @JoinColumn({ name: "branch_id" }) // Define explicitamente a FK
   branch: Branch;
 
   @CreateDateColumn()

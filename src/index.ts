@@ -28,7 +28,7 @@ app.use('/list/:id', userRouter)
 app.use('/user', userRouter);
 
 app.use('/product', productRouter)
-
+app.use('/products', productRouter)
 
 
 app.get("/env", (req, res) => {

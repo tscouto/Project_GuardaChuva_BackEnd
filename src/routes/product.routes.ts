@@ -9,6 +9,6 @@ const productControler = new ProductController()
 
 
 productRouter.post("/", (req, res, next) => verifyToken(["BRANCH"], req, res, next), productControler.createProduct)
-
+productRouter.get("/", (req, res, next) => verifyToken(["BRANCH"], req, res, next), productControler.listProduct)
 
 export default productRouter;

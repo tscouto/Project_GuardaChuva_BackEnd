@@ -147,3 +147,350 @@
 [22-02-2025 12:44:42.701 AM] info: 	O servidor está rodando em http://localhost:3000
 [22-02-2025 12:44:57.073 AM] info: 	O servidor está rodando em http://localhost:3000
 [22-02-2025 12:45:19.372 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 08:13:34.801 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 08:14:33.851 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 08:15:04.645 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 08:15:10.046 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 08:15:18.291 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 08:16:40.888 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 08:16:59.940 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 08:17:08.070 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 08:19:20.588 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 08:22:50.945 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 08:23:03.760 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 08:23:41.237 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 08:26:16.644 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 08:26:34.929 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 08:27:14.271 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 08:27:27.877 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 08:28:09.198 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 08:29:39.955 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 08:31:19.786 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 08:31:41.826 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 08:32:04.473 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:16:09.654 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:16:21.713 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:17:05.421 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:20:34.923 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:20:48.945 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:24:39.655 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:25:06.108 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:27:35.133 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:29:11.911 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:29:39.379 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:30:16.151 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:31:57.261 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:32:09.418 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:33:25.538 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:33:38.621 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:35:01.374 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:35:22.514 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:35:32.207 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:37:58.153 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:38:17.379 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:39:15.976 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:39:32.870 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:40:05.636 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:40:24.636 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:40:59.940 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:48:12.432 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:51:01.483 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:51:03.636 AM] info: 	[object Object]
+[22-02-2025 09:51:05.024 AM] info: 	[object Object]
+[22-02-2025 09:51:53.786 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:52:39.865 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:53:16.439 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:53:16.724 AM] info: 	[object Object]
+[22-02-2025 09:53:59.596 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:54:23.684 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:54:56.428 AM] info: 	[object Object]
+[22-02-2025 09:55:37.600 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:55:37.946 AM] info: 	[object Object]
+[22-02-2025 09:56:04.329 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:57:24.793 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:57:25.204 AM] info: 	[object Object]
+[22-02-2025 09:58:09.488 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:58:11.885 AM] info: 	[object Object]
+[22-02-2025 09:58:58.751 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 09:59:02.533 AM] info: 	[object Object]
+[22-02-2025 09:59:49.778 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:00:12.788 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:00:30.622 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:00:37.023 AM] info: 	[object Object]
+[22-02-2025 10:04:23.703 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:04:31.318 AM] info: 	[object Object]
+[22-02-2025 10:05:39.955 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:05:52.095 AM] info: 	[object Object]
+[22-02-2025 10:08:43.252 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:08:49.421 AM] info: 	[object Object]
+[22-02-2025 10:11:27.692 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:12:19.359 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:13:46.821 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:14:31.871 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:15:07.006 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:19:29.856 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:20:55.613 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:21:19.193 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:21:41.435 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:22:19.993 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:22:30.728 AM] info: 	[object Object]
+[22-02-2025 10:24:34.497 AM] info: 	[object Object]
+[22-02-2025 10:24:54.723 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:25:11.399 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:25:15.494 AM] info: 	[object Object]
+[22-02-2025 10:25:45.226 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:26:09.312 AM] info: 	undefined
+[22-02-2025 10:26:11.982 AM] info: 	undefined
+[22-02-2025 10:28:15.868 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:28:17.462 AM] info: 	undefined
+[22-02-2025 10:29:26.661 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:29:47.659 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:40:18.817 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:50:34.104 AM] info: 	undefined
+[22-02-2025 10:54:03.122 AM] info: 	undefined
+[22-02-2025 10:54:19.328 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:54:29.043 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:54:32.176 AM] info: 	undefined
+[22-02-2025 10:54:32.180 AM] info: 	undefined
+[22-02-2025 10:55:34.964 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:55:37.939 AM] info: 	undefined
+[22-02-2025 10:55:52.594 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:55:52.708 AM] info: 	undefined
+[22-02-2025 10:57:01.892 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:57:04.022 AM] info: 	undefined
+[22-02-2025 10:57:57.684 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:58:09.948 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 10:58:10.611 AM] info: 	undefined
+[22-02-2025 11:00:35.374 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 11:00:45.622 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 11:01:32.059 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 11:01:36.853 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 11:01:46.625 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 11:01:50.259 AM] info: 	[object Object]
+[22-02-2025 11:02:27.004 AM] info: 	[object Object]
+[22-02-2025 11:02:28.123 AM] info: 	[object Object]
+[22-02-2025 11:02:28.643 AM] info: 	[object Object]
+[22-02-2025 11:02:28.817 AM] info: 	[object Object]
+[22-02-2025 11:02:29.028 AM] info: 	[object Object]
+[22-02-2025 11:02:29.201 AM] info: 	[object Object]
+[22-02-2025 11:02:29.474 AM] info: 	[object Object]
+[22-02-2025 11:02:29.662 AM] info: 	[object Object]
+[22-02-2025 11:02:29.853 AM] info: 	[object Object]
+[22-02-2025 11:02:30.027 AM] info: 	[object Object]
+[22-02-2025 11:02:30.204 AM] info: 	[object Object]
+[22-02-2025 11:02:30.383 AM] info: 	[object Object]
+[22-02-2025 11:02:31.080 AM] info: 	[object Object]
+[22-02-2025 11:02:31.233 AM] info: 	[object Object]
+[22-02-2025 11:02:31.244 AM] info: 	[object Object]
+[22-02-2025 11:02:31.687 AM] info: 	[object Object]
+[22-02-2025 11:02:31.700 AM] info: 	[object Object]
+[22-02-2025 11:02:31.917 AM] info: 	[object Object]
+[22-02-2025 11:02:32.052 AM] info: 	[object Object]
+[22-02-2025 11:02:32.176 AM] info: 	[object Object]
+[22-02-2025 11:02:32.272 AM] info: 	[object Object]
+[22-02-2025 11:02:32.417 AM] info: 	[object Object]
+[22-02-2025 11:02:32.571 AM] info: 	[object Object]
+[22-02-2025 11:02:32.767 AM] info: 	[object Object]
+[22-02-2025 11:02:32.890 AM] info: 	[object Object]
+[22-02-2025 11:02:32.944 AM] info: 	[object Object]
+[22-02-2025 11:02:33.145 AM] info: 	[object Object]
+[22-02-2025 11:02:33.330 AM] info: 	[object Object]
+[22-02-2025 11:02:33.502 AM] info: 	[object Object]
+[22-02-2025 11:02:33.640 AM] info: 	[object Object]
+[22-02-2025 11:02:33.806 AM] info: 	[object Object]
+[22-02-2025 11:02:33.872 AM] info: 	[object Object]
+[22-02-2025 11:02:34.201 AM] info: 	[object Object]
+[22-02-2025 11:02:34.239 AM] info: 	[object Object]
+[22-02-2025 11:02:34.404 AM] info: 	[object Object]
+[22-02-2025 11:02:34.615 AM] info: 	[object Object]
+[22-02-2025 11:02:34.654 AM] info: 	[object Object]
+[22-02-2025 11:03:17.598 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 11:03:45.914 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 11:03:53.163 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 11:04:21.466 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 11:04:21.642 AM] info: 	[object Object]
+[22-02-2025 11:04:33.835 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 11:04:44.420 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 11:04:44.873 AM] info: 	[object Object]
+[22-02-2025 11:04:44.882 AM] info: 	[object Object]
+[22-02-2025 11:04:52.183 AM] info: 	[object Object]
+[22-02-2025 11:04:52.186 AM] info: 	[object Object]
+[22-02-2025 11:05:21.539 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 11:05:33.322 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 11:05:39.556 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 11:05:39.654 AM] info: 	[object Object]
+[22-02-2025 11:05:39.665 AM] info: 	[object Object]
+[22-02-2025 11:06:08.391 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 11:06:14.315 AM] info: 	[object Object]
+[22-02-2025 11:10:07.829 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 11:10:13.919 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 11:12:01.315 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 11:12:01.771 AM] info: 	[object Object]
+[22-02-2025 11:13:04.938 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 11:13:48.527 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 11:13:49.492 AM] info: 	[object Object]
+[22-02-2025 11:14:23.873 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 11:17:40.403 AM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 11:18:01.138 AM] info: 	[object Object]
+[22-02-2025 11:18:20.645 AM] info: 	[object Object]
+[22-02-2025 02:23:49.106 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 02:24:18.706 PM] info: 	[object Object]
+[22-02-2025 02:25:41.673 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 02:26:45.651 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 02:26:52.580 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 02:26:59.526 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 02:27:05.669 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 02:27:12.094 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 02:27:19.696 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 02:27:26.486 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 02:27:38.827 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 02:27:48.802 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 02:27:55.736 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 02:28:07.276 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 02:28:14.533 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 02:28:32.107 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 02:28:36.020 PM] info: 	undefined
+[22-02-2025 02:28:36.042 PM] info: 	undefined
+[22-02-2025 02:29:41.444 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 02:32:05.358 PM] info: 	undefined
+[22-02-2025 02:32:21.022 PM] info: 	undefined
+[22-02-2025 02:32:22.326 PM] info: 	undefined
+[22-02-2025 02:35:16.891 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 02:35:17.086 PM] info: 	undefined
+[22-02-2025 02:35:18.649 PM] info: 	undefined
+[22-02-2025 02:35:31.293 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 02:36:03.554 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 02:36:09.649 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 02:36:22.737 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 02:36:50.224 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 02:38:14.508 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 02:38:16.274 PM] info: 	undefined
+[22-02-2025 02:39:58.223 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 02:39:58.350 PM] info: 	undefined
+[22-02-2025 02:39:59.807 PM] info: 	undefined
+[22-02-2025 02:40:21.614 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 02:40:29.620 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 02:43:05.516 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 02:43:27.855 PM] info: 	undefined
+[22-02-2025 02:43:29.083 PM] info: 	undefined
+[22-02-2025 02:43:29.663 PM] info: 	undefined
+[22-02-2025 02:43:29.860 PM] info: 	undefined
+[22-02-2025 02:43:30.378 PM] info: 	undefined
+[22-02-2025 02:43:30.396 PM] info: 	undefined
+[22-02-2025 02:43:30.593 PM] info: 	undefined
+[22-02-2025 02:43:30.723 PM] info: 	undefined
+[22-02-2025 02:43:31.301 PM] info: 	undefined
+[22-02-2025 02:51:23.363 PM] info: 	undefined
+[22-02-2025 02:51:24.142 PM] info: 	undefined
+[22-02-2025 02:51:24.528 PM] info: 	undefined
+[22-02-2025 02:51:24.704 PM] info: 	undefined
+[22-02-2025 02:51:24.937 PM] info: 	undefined
+[22-02-2025 02:51:25.126 PM] info: 	undefined
+[22-02-2025 02:51:25.431 PM] info: 	undefined
+[22-02-2025 02:51:25.634 PM] info: 	undefined
+[22-02-2025 02:51:25.802 PM] info: 	undefined
+[22-02-2025 02:51:26.005 PM] info: 	undefined
+[22-02-2025 02:51:26.960 PM] info: 	undefined
+[22-02-2025 02:51:27.040 PM] info: 	undefined
+[22-02-2025 02:51:27.052 PM] info: 	undefined
+[22-02-2025 02:51:27.060 PM] info: 	undefined
+[22-02-2025 02:51:27.072 PM] info: 	undefined
+[22-02-2025 02:51:27.120 PM] info: 	undefined
+[22-02-2025 02:51:28.779 PM] info: 	undefined
+[22-02-2025 02:51:29.505 PM] info: 	undefined
+[22-02-2025 02:51:29.778 PM] info: 	undefined
+[22-02-2025 02:51:30.392 PM] info: 	undefined
+[22-02-2025 02:51:30.587 PM] info: 	undefined
+[22-02-2025 02:51:31.066 PM] info: 	undefined
+[22-02-2025 02:51:31.329 PM] info: 	undefined
+[22-02-2025 02:51:31.454 PM] info: 	undefined
+[22-02-2025 02:51:31.629 PM] info: 	undefined
+[22-02-2025 02:54:18.632 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 02:55:10.040 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 02:56:32.075 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:00:42.722 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:02:04.426 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:03:23.418 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:03:31.679 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:03:40.483 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:07:55.519 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:08:03.115 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:08:49.731 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:09:06.671 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:09:25.778 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:09:49.756 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:10:01.225 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:10:12.238 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:10:38.774 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:11:10.727 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:11:21.119 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:12:09.483 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:12:59.417 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:14:21.059 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:16:11.885 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:16:22.022 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:17:05.626 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:17:12.198 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:17:21.870 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:17:32.761 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:17:40.563 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:18:54.861 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:19:00.514 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:19:16.877 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:19:35.677 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:19:43.357 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:21:02.884 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:21:12.259 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:22:33.445 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:22:42.377 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:23:04.371 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:23:17.072 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:23:29.371 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:23:40.631 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:24:05.028 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:24:12.868 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:24:24.262 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:24:34.135 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:24:40.350 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:24:48.210 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:25:06.983 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:26:08.909 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:26:30.031 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:27:47.238 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:29:03.616 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:30:34.886 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:30:51.034 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:31:00.224 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:43:15.228 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:50:41.308 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:51:45.659 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:51:53.935 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:52:30.788 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:52:41.816 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:53:55.130 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:54:12.458 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:56:05.631 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:56:35.884 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 03:57:34.266 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 04:00:36.574 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 04:05:30.505 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 04:07:09.839 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 04:08:13.152 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 04:09:22.543 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 04:12:45.493 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 04:13:17.331 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 04:13:39.472 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 04:14:00.785 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 04:15:07.821 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 04:15:18.485 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 04:15:27.606 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 04:15:42.853 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 04:16:34.926 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 04:17:39.249 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 04:17:47.291 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 04:18:06.943 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 04:18:20.501 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 04:21:42.108 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 04:21:48.831 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 04:22:09.132 PM] info: 	O servidor está rodando em http://localhost:3000
+[22-02-2025 04:22:25.332 PM] info: 	O servidor está rodando em http://localhost:3000

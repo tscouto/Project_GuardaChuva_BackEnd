@@ -14,25 +14,18 @@ import { Router } from "express";
 import UserController from "../controllers/UserController";
 import authRouter from "./auth.routes";
 import verifyToken from "../middlewares/auth";
-import { AuthRequest } from "../middlewares/auth";
+
 import ProductController from "../controllers/ProductController";
 
 const userRouter = Router();
-const productControler = new ProductController()
 const userController = new UserController();
 
 userRouter.post("/", userController.create);
 userRouter.post("/login", authRouter); // Alterado de .post para .use
-userRouter.get("/", (req, res, next) => verifyToken(["ADMIN"], req as AuthRequest, res, next), userController.listaUsuarios);
-userRouter.get("/:id", (req, res, next) => verifyToken(["ADMIN", "DRIVER"], req as AuthRequest, res, next), userController.listUsarioId);
-userRouter.put("/:id", (req, res, next) => verifyToken(["ADMIN", "DRIVER"], req as AuthRequest, res, next), userController.updateUser);
-userRouter.patch("/status/:id", (req, res, next) => verifyToken(["ADMIN", "DRIVER"], req as AuthRequest, res, next), userController.updateStatusUsuario)
-
-console.log(userRouter)
-userRouter.post("/", (req, res, next) => verifyToken(["BRANCH"], req as AuthRequest, res, next), productControler.createProduct)
-
-
-// userRouter.post("/", verifyToken(["BRANCH"]), productControler.createProduct);
+userRouter.get("/", (req, res, next) => verifyToken(["ADMIN"], req, res, next), userController.listaUsuarios);
+userRouter.get("/:id", (req, res, next) => verifyToken(["ADMIN", "DRIVER"], req, res, next), userController.listUsarioId);
+userRouter.put("/:id", (req, res, next) => verifyToken(["ADMIN", "DRIVER"], req, res, next), userController.updateUser);
+userRouter.patch("/status/:id", (req, res, next) => verifyToken(["ADMIN", "DRIVER"], req, res, next), userController.updateStatusUsuario)
 
 
 export default userRouter;

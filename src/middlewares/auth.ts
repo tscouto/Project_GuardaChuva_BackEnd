@@ -72,14 +72,15 @@ import AppError from "../utils/AppError";
 
 type dataJwt = JwtPayload & { userId: string; roles: string[] };
 
-export interface AuthRequest extends Request {
-  userId: string;
-}
+// export interface AuthRequest extends Request {
+//   userId: string;
+// }
 
-export const verifyToken = (listaPermissoes: string[], req: AuthRequest, res: Response, next: NextFunction) => {
+export const verifyToken = (listaPermissoes: string[], req: Request, res: Response, next: NextFunction) => {
   try {
+    console.log("Request body in verifyToken middleware:", req.body);
     const token = req.headers.authorization?.split(" ")[1] ?? "";
-    
+
     if (!token) {
       res.status(401).json("Token inválido!");
       return;
@@ -91,9 +92,9 @@ export const verifyToken = (listaPermissoes: string[], req: AuthRequest, res: Re
 
     let hasPermission = false;
 
-    if (listaPermissoes.includes(profile) ) {
+    if (listaPermissoes.includes(profile)) {
       hasPermission = true;
-    } 
+    }
 
 
     if (!hasPermission) {
@@ -101,7 +102,7 @@ export const verifyToken = (listaPermissoes: string[], req: AuthRequest, res: Re
       return;
     }
 
-    req.userId = payload.userId;
+    req.userId = Number(payload.userId);
 
     next();
   } catch (error) {

@@ -13,6 +13,9 @@ export class Branch {
   @Column({ length: 30, unique: true })
   document: string;
 
+  @Column({ type: "int" })
+  user_id: number;
+
   @ManyToOne(() => User, (user) => user.branches, { nullable: false })
   @JoinColumn({ name: "user_id" }) // Garante que a coluna no banco será "user_id"
   user: User;

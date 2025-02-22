@@ -19,7 +19,10 @@ export class Product {
   @Column({ type: 'varchar', length: 200, nullable: true })
   url_cover: string;
 
-  @ManyToOne(() => Branch, branch => branch.id, { nullable: false })
+  @Column({ type: 'int' })
+  branch_id: number;
+
+  @ManyToOne(() => Branch, branch => branch.id)
   @JoinColumn({ name: "branch_id" }) // Define explicitamente a FK
   branch: Branch;
 

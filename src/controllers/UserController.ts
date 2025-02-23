@@ -237,21 +237,7 @@ class UserController {
         res.status(200).json(user); // Retorna os dados do próprio usuário
         return;
       }
-      /*
-      // if (decoded.profile === "DRIVER" && Number(decoded.id) === paramsid) {
-      //   const user = await this.userRepository.findOne({
-      //     where: { id: paramsid },
-      //   });
-
-      //   if (!user) {
-      //     res.status(404).json({ message: "Usuário não encontrado" });
-      //     return;
-      //   }
-
-      //   res.status(200).json(user); // Retorna os dados do usuário específico
-      //   return;
-      // }
-      */
+      
       res.status(403).json({ message: "Acesso negado" }); // Se não for ADMIN ou DRIVER válido
 
     } catch (error) {

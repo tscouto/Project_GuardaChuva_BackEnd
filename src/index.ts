@@ -14,6 +14,8 @@ import authRouter from "./routes/auth.routes";
 import logger from "./config/winston";
 import productRouter from "./routes/product.routes";
 
+import movementsRouter from "./routes/movements.routes"; 
+
 
 const app = express();
 
@@ -21,14 +23,21 @@ app.use(cors()); // Permite que o express entenda requisições de outros domín
 
 app.use(express.json()); // Permite que o express '''entenda JSON
 
+// rotas de usuarios
 app.use("/users", userRouter);
 app.use("/login", authRouter);
 app.use('/list', userRouter)
 app.use('/list/:id', userRouter)
 app.use('/user', userRouter);
 
+//rotas de produtos
 app.use('/product', productRouter)
 app.use('/products', productRouter)
+
+//rotas de movimentações
+
+app.use('/movements', movementsRouter)
+
 
 
 app.get("/env", (req, res) => {

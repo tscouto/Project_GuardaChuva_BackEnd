@@ -54,7 +54,7 @@ export class CreateTableBranches1739840083396 implements MigrationInterface {
                 
             })
         );
-
+        
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {

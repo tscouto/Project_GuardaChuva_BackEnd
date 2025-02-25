@@ -37,7 +37,7 @@ app.use('/products', productRouter)
 //rotas de movimentações
 
 app.use('/movements', movementsRouter)
-
+app.use('/movements/:id/', movementsRouter)
 
 
 app.get("/env", (req, res) => {

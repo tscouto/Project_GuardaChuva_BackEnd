@@ -107,6 +107,43 @@ class MovementsController {
         }
 
     }
+
+    updateStatusMovements = async (req: Request, res: Response) => {
+        try {
+            type StatusType = "IN_PROGRESS";
+            const status: StatusType = "IN_PROGRESS";
+
+            const movementId = Number(req.params.id); // Pegando ID da movimentação
+            if (!movementId) {
+                return res.status(400).json({ message: "ID da movimentação é obrigatório" });
+            }
+
+            // 🔹 Buscar a movimentação
+            const movement = await this.movementsRepository.findOne({ where: { id: movementId } });
+            if (!movement) {
+                return res.status(404).json({ message: "Movimentação não encontrada" });
+            }
+
+            // 🔹 Atualizar o status
+            await this.movementsRepository.update(movementId, { status });
+
+            // 🔹 Buscar novamente a movimentação para retornar os dados atualizados
+            const updatedMovement = await this.movementsRepository.findOne({ where: { id: movementId } });
+
+            return res.status(200).json({
+                id: updatedMovement?.id,
+                destination_branch_id: updatedMovement?.destination_branch_id, // Corrigido
+                product_id: updatedMovement?.product_id,
+                quantity: updatedMovement?.quantity,
+                status: updatedMovement?.status,
+                created_at: updatedMovement?.created_at,
+                updated_at: updatedMovement?.updated_at,
+            });
+        } catch (error) {
+            console.error("Erro ao atualizar status da movimentação:", error);
+            return res.status(500).json({ message: "Erro interno do servidor" });
+        }
+    };
 }
 
 export default MovementsController

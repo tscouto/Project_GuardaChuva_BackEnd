@@ -10,6 +10,6 @@ const movementsControler = new MovementsController()
 
 //@ts-ignore
 movementsRouter.post("/", (req, res, next) => verifyToken(["BRANCH"], req, res, next), movementsControler.createMovements)
-
+movementsRouter.get("/", (req, res, next) => verifyToken(["BRANCH"], req, res, next), movementsControler.listMovements)
 
 export default movementsRouter;

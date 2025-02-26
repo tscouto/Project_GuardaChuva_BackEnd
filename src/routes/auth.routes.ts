@@ -42,7 +42,7 @@ authRouter.post("/", async (req: Request, res: Response) => {
             profile: user.profile
         } as PayloadJwt
 
-        const token = await jwt.sign(payload, chaveSecretaJwt, { expiresIn: '1h' })
+        const token = await jwt.sign(payload, chaveSecretaJwt, { expiresIn: '24h' })
 
         if (valido) {
             res.status(200).json({ name: user.name, token: token })

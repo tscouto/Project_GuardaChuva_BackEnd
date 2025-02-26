@@ -144,6 +144,77 @@ class MovementsController {
             return res.status(500).json({ message: "Erro interno do servidor" });
         }
     };
+    updateFinish = async (req: Request, res: Response) => {
+        try {
+            type StatusType = "FINISHED";
+            const status: StatusType = "FINISHED";
+
+            const movementId = Number(req.params.id);
+            if (isNaN(movementId)) {
+                return res.status(400).json({ message: "ID da movimentação é obrigatório e deve ser um número válido" });
+            }
+
+            // Buscar a movimentação
+            const movement = await this.movementsRepository.findOne({
+                where: { id: movementId },
+                relations: ["product", "destinationBranch"]
+            });
+
+            if (!movement) {
+                return res.status(404).json({ message: "Movimentação não encontrada" });
+            }
+
+            if (movement.status === "FINISHED") {
+                return res.status(400).json({ error: "Movimentação já finalizada" });
+            }
+
+            if (movement.driver_id !== req.userId) {
+                return res.status(403).json({ message: "Você não tem permissão para finalizar esta movimentação" });
+            }
+
+            // Atualizar o status
+            await this.movementsRepository.update(movementId, { status });
+
+            // Verifica se o produto já existe na filial de destino
+            let existingProduct = await this.productRepository.findOne({
+                where: {
+                    description: movement.product.description,
+                    branch_id: movement.destinationBranch.id
+                }
+            });
+
+            if (existingProduct) {
+                // Atualiza a quantidade do produto existente
+                existingProduct.amount += movement.quantity;
+                await this.productRepository.save(existingProduct);
+            } else {
+                // Cria um novo produto se não existir na filial
+                const newProduct = this.productRepository.create({
+                    amount: movement.quantity,
+                    description: movement.product.description,
+                    url_cover: movement.product.url_cover,
+                    branch_id: movement.destinationBranch.id,
+                });
+                await this.productRepository.save(newProduct);
+            }
+
+            // Buscar novamente a movimentação para retornar os dados atualizados
+            const updatedMovement = await this.movementsRepository.findOne({ where: { id: movementId } });
+
+            return res.status(200).json({
+                id: updatedMovement?.id,
+                destination_branch_id: updatedMovement?.destination_branch_id,
+                product_id: updatedMovement?.product_id,
+                quantity: updatedMovement?.quantity,
+                status: updatedMovement?.status,
+                created_at: updatedMovement?.created_at,
+                updated_at: updatedMovement?.updated_at,
+            });
+        } catch (error) {
+            console.error("Erro ao atualizar status da movimentação:", error);
+            return res.status(500).json({ message: "Erro interno do servidor" });
+        }
+    }
 }
 
 export default MovementsController

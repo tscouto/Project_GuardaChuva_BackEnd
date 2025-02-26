@@ -15,7 +15,6 @@ import UserController from "../controllers/UserController";
 import authRouter from "./auth.routes";
 import verifyToken from "../middlewares/auth";
 
-import ProductController from "../controllers/ProductController";
 
 const userRouter = Router();
 const userController = new UserController();

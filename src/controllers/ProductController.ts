@@ -24,19 +24,12 @@ class ProductController {
     createProduct = async (req: Request, res: Response, next: NextFunction) => {
         try {
 
-            const token = req.headers.authorization?.split(" ")[1];
+
             const { name, amount, description, url_cover } = req.body;
 
-            if (!token) {
-                res.status(401).json({ message: "Token inválido" });
-                return
-
-            }
-
-            const decoded = jwt.verify(token, process.env.JWT_SECRET ?? "") as dataJwt;
 
 
-            const branch = await this.branchRepository.findOne({ where: { id: Number(req.userId) } });
+            const branch = await this.branchRepository.findOne({ where: { user_id: Number(req.userId) } });
 
             if (!branch) {
                 res.status(404).json({ message: "Usuário não encontrado" });
@@ -52,11 +45,6 @@ class ProductController {
 
             if (amount <= 0) {
                 res.status(400).json({ error: "'amount' deve ser um número positivo." });
-                return
-            }
-
-            if (decoded.profile !== "BRANCH") {
-                res.status(403).json({ error: "Acesso proibido. Apenas filiais podem cadastrar produtos." });
                 return
             }
 
@@ -89,41 +77,20 @@ class ProductController {
             return
         }
     };
-    listProduct = async (req: Request, res: Response, next: NextFunction) => {
+    listProduct = async (req: Request, res: Response) => {
 
         try {
+            const listProducts = await this.productRepository.find({});
 
-            const token = req.headers.authorization?.split(" ")[1];
-
-
-            if (!token) {
-                res.status(401).json({ message: "Token inválido" });
-                return
-
+            if (listProducts.length === 0) {
+                return res.status(404).json({ message: "Nenhum produto encontrado." });
             }
 
-            const decoded = jwt.verify(token, process.env.JWT_SECRET ?? "") as dataJwt;
-            const branch = await this.branchRepository.findOne({ where: { id: Number(req.userId) } });
-
-            if (!branch) {
-                res.status(404).json({ message: "Usuário não encontrado" });
-                return
-            }
-
-
-            if (decoded.profile === "BRANCH" && Number(decoded.userId) === branch.user_id) {
-                const listProducts = await this.productRepository.find({})
-                res.status(200).json(listProducts)
-                return
-            }
-
-            res.status(401).json("Não a lista de produtos")
-
+            return res.status(200).json(listProducts);
 
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: "Erro ao processar requisição" });
-            return
+            return res.status(500).json({ message: "Erro ao processar requisição" });
         }
     }
 

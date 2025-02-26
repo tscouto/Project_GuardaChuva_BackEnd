@@ -13,4 +13,6 @@ movementsRouter.post("/", (req, res, next) => verifyToken(["BRANCH"], req, res, 
 movementsRouter.get("/", (req, res, next) => verifyToken(["BRANCH"], req, res, next), movementsControler.listMovements)
 //@ts-ignore
 movementsRouter.patch("/status/:id", (req, res, next) => verifyToken(["BRANCH"], req, res, next), movementsControler.updateStatusMovements)
+//@ts-ignore
+movementsRouter.patch("/end/:id", (req, res, next) => verifyToken(["BRANCH"], req, res, next), movementsControler.updateFinish)
 export default movementsRouter;

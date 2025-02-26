@@ -1,4 +1,4 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { MigrationInterface, QueryRunner, Table, TableColumn, TableForeignKey } from "typeorm";
 
 export class CreateTableMovements1740317856207 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
@@ -57,12 +57,15 @@ export class CreateTableMovements1740317856207 implements MigrationInterface {
                         referencedColumnNames: ["id"],
                         onDelete: "CASCADE",
                     }
-                ]
+                ],
+
             })
-        );
+        )
+
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
+
         await queryRunner.dropTable("movements");
     }
 }

@@ -29,7 +29,7 @@ class ProductController {
 
 
 
-            const branch = await this.branchRepository.findOne({ where: { user_id: Number(req.userId) } });
+            const branch = await this.branchRepository.findOne({ where: { user_id: Number(req.userId) }, relations: ["user"] });
 
             if (!branch) {
                 res.status(404).json({ message: "Usuário não encontrado" });

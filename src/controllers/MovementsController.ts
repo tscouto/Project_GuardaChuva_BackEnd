@@ -21,25 +21,32 @@ class MovementsController {
         this.movementsRepository = AppDataSource.getRepository(Movements)
         this.userRepository = AppDataSource.getRepository(User)
     }
+
+
     createMovements = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const { product_id, destination_branch_id, quantity } = req.body;
-            // const token = req.headers.authorization?.split(" ")[1];
 
-            // if (!token) {
-            //     return res.status(401).json({ message: "Token inválido" });
-            // }
+            // 🔹 Buscar a filial de origem baseada no usuário autenticado
+            const branch = await this.branchRepository.findOne({
+                where: { user_id: Number(req.userId) },
+                relations: ["user"]
+            });
 
-            // const decoded = jwt.verify(token, process.env.JWT_SECRET ?? "") as dataJwt;
+            if (!branch) {
+                return res.status(404).json({ message: "Filial de origem não encontrada" });
+            }
 
-            // Buscar a filial de origem (usuário autenticado)
-            const branch = await this.branchRepository.findOne({ where: { id: Number(req.userId) } });
+            // 🔹 Verificar se há um motorista vinculado à filial
+            //   const driver = await this.userRepository.findOne({
+            //     where: { id: branch.user_id, profile: "DRIVER" }
+            //   });
 
-            // Verificar se o perfil é 'BRANCH' e se o userId corresponde à filial
-            // if (decoded.profile !== "BRANCH" || Number(decoded.userId) !== branch?.user_id) {
-            //     return res.status(403).json({ message: "Acesso negado" });
-            // }
+            //   if (!driver) {
+            //     return res.status(400).json({ message: "Usuário responsável pela filial não é um motorista." });
+            //   }
 
+            // 🔹 Validação dos dados recebidos
             if (!product_id || !destination_branch_id || !quantity) {
                 return res.status(400).json({ message: "Todos os campos são obrigatórios" });
             }
@@ -49,20 +56,24 @@ class MovementsController {
             }
 
             // 🔹 Verificar se a filial de destino existe
-            const destinationBranch = await this.branchRepository.findOne({ where: { id: Number(destination_branch_id) } });
+            const destinationBranch = await this.branchRepository.findOne({
+                where: { id: Number(destination_branch_id) }
+            });
             if (!destinationBranch) {
                 return res.status(404).json({ message: "Filial de destino não encontrada" });
             }
 
             // 🔹 Verificar se a filial de origem e destino são diferentes
-            if (Number(branch?.user_id) === Number(destination_branch_id)) {
+            if (Number(branch.id) === Number(destination_branch_id)) {
                 return res.status(400).json({ message: "A filial de origem não pode ser a mesma que a filial de destino" });
             }
 
-            // 🔹 Buscar o produto
-            const product = await this.productRepository.findOne({ where: { id: Number(product_id) } });
+            // 🔹 Buscar o produto e verificar se pertence à filial de origem
+            const product = await this.productRepository.findOne({
+                where: { id: Number(product_id), branch_id: branch.id }
+            });
             if (!product) {
-                return res.status(404).json({ message: "Produto não encontrado" });
+                return res.status(404).json({ message: "Produto não encontrado na filial de origem" });
             }
 
             // 🔹 Verificar se a quantidade solicitada está disponível
@@ -76,6 +87,7 @@ class MovementsController {
                 product_id,
                 quantity,
                 status: "PENDING",
+                driver_id: branch.id
             });
 
             // 🔹 Atualizar a quantidade do produto na filial de origem
@@ -87,16 +99,17 @@ class MovementsController {
                     id: createMovements.id,
                     destination_branch_id: createMovements.destination_branch_id,
                     product_id: createMovements.product_id,
+                    name: product.name,
                     quantity: createMovements.quantity,
                     status: createMovements.status,
+                    driver_id: createMovements.driver_id
                 },
             });
-
         } catch (error) {
             console.error(error);
             res.status(500).json({ message: "Erro ao processar requisição" });
         }
-    }
+    };
     listMovements = async (req: Request, res: Response) => {
         try {
             const moviments = await this.movementsRepository.find({})
@@ -124,16 +137,23 @@ class MovementsController {
                 return res.status(404).json({ message: "Movimentação não encontrada" });
             }
 
+            if (movement.status === "IN_PROGRESS") {
+                return res.status(404).json({ message: "Status da movimentação em IN_PROGRESS" });
+            }
+
             // 🔹 Atualizar o status
             await this.movementsRepository.update(movementId, { status });
 
+
+
             // 🔹 Buscar novamente a movimentação para retornar os dados atualizados
-            const updatedMovement = await this.movementsRepository.findOne({ where: { id: movementId } });
+            const updatedMovement = await this.movementsRepository.findOne({ where: { id: movementId }, relations: ["product"] });
 
             return res.status(200).json({
                 id: updatedMovement?.id,
                 destination_branch_id: updatedMovement?.destination_branch_id, // Corrigido
                 product_id: updatedMovement?.product_id,
+                name: updatedMovement?.product?.name ?? 'Produto não encontrado',
                 quantity: updatedMovement?.quantity,
                 status: updatedMovement?.status,
                 created_at: updatedMovement?.created_at,
@@ -205,6 +225,7 @@ class MovementsController {
                 id: updatedMovement?.id,
                 destination_branch_id: updatedMovement?.destination_branch_id,
                 product_id: updatedMovement?.product_id,
+                name: updatedMovement?.product.name,
                 quantity: updatedMovement?.quantity,
                 status: updatedMovement?.status,
                 created_at: updatedMovement?.created_at,

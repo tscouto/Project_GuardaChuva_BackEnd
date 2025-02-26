@@ -32,7 +32,6 @@ export class Movements {
   @JoinColumn({ name: "destination_branch_id" })
   destinationBranch: Branch;
 
-
   @ManyToOne(() => User, { nullable: false })
   @JoinColumn({ name: "driver_id" })
   driver: User;

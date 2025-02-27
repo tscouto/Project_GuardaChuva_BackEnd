@@ -2,17 +2,18 @@ import { Router } from "express"
 import verifyToken from "../middlewares/auth";
 import MovementsController from "../controllers/MovementsController";
 import { Request, Response, NextFunction } from "express";
+import verifyTokenEnabled from "../middlewares/verifyTokenEnabled";
 
 const movementsRouter = Router();
 
 const movementsControler = new MovementsController()
 
 
-//@ts-ignore
-movementsRouter.post("/", (req, res, next) => verifyToken(["BRANCH"], req, res, next), movementsControler.createMovements)
-movementsRouter.get("/", (req, res, next) => verifyToken(["BRANCH"], req, res, next), movementsControler.listMovements)
-//@ts-ignore
-movementsRouter.patch("/status/:id", (req, res, next) => verifyToken(["BRANCH"], req, res, next), movementsControler.updateStatusMovements)
-//@ts-ignore
-movementsRouter.patch("/end/:id", (req, res, next) => verifyToken(["BRANCH"], req, res, next), movementsControler.updateFinish)
+
+movementsRouter.post("/", verifyTokenEnabled, movementsControler.createMovements)
+movementsRouter.get("/", verifyTokenEnabled, movementsControler.listMovements)
+
+movementsRouter.patch("/status/:id", verifyTokenEnabled, movementsControler.updateStatusMovements)
+
+movementsRouter.patch("/end/:id", verifyTokenEnabled , movementsControler.updateFinish)
 export default movementsRouter;

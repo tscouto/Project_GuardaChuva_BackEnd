@@ -169,6 +169,9 @@ class UserController {
       let profileFilter = req.query.profile
       let users = []
       // Buscar todos os usuários da tabela User
+      if (req.profile !== "ADMIN") {
+        res.status(401).json({ message: "Somente usuário admim pode acessar a rota" })
+      }
       if (profileFilter !== null) {
         users = await this.userRepository.find({
           where: {
@@ -200,15 +203,7 @@ class UserController {
 
     try {
 
-      const token = req.headers.authorization?.split(" ")[1]
       const paramsid = Number(req.params.id)
-
-      if (!token) {
-        res.status(401).json("Token inválido!");
-        return;
-      }
-
-      const decoded = jwt.verify(token, process.env.JWT_SECRET ?? "") as dataJwt;
 
 
       if (isNaN(paramsid)) {
@@ -216,17 +211,21 @@ class UserController {
         return
       }
 
-      if (decoded.profile === 'ADMIN') {
+      if (req.profile === 'ADMIN') {
         const user = await this.userRepository.findOne({
-          where: { id: paramsid },
+          where: { id: Number(paramsid) },
         });
         res.status(200).json(user);
         return;
       }
-      if (decoded.profile === "DRIVER" && Number(decoded.userId) === paramsid) {
-        // Busca SOMENTE o usuário com ID igual ao do token
+      if (req.profile === "DRIVER") {
+        if (paramsid !== Number(req.userId)) {
+          res.status(403).json({ message: "Acesso negado" });
+          return;
+        }
+
         const user = await this.userRepository.findOne({
-          where: { id: paramsid },
+          where: { id: paramsid }, // Aqui busca pelo paramsid, mas só se for igual ao req.userId
         });
 
         if (!user) {
@@ -234,16 +233,20 @@ class UserController {
           return;
         }
 
-        res.status(200).json(user); // Retorna os dados do próprio usuário
+        res.status(200).json(user);
         return;
       }
-      
+
+
       res.status(403).json({ message: "Acesso negado" }); // Se não for ADMIN ou DRIVER válido
 
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: "Erro ao processar requisição" });
     }
+
+
+
   };
 
 
@@ -254,15 +257,6 @@ class UserController {
       const { id } = req.params;
       const bodyUpdate = req.body;
 
-      // Verificar token de autorização
-      const token = req.headers.authorization?.split(" ")[1];
-      if (!token) {
-        res.status(401).json({ message: "Token inválido!" });
-        return
-      }
-
-      // Decodificar token
-      const decoded = jwt.verify(token, process.env.JWT_SECRET ?? "") as dataJwt;
 
       // Verificar se o ID do usuário é válido
       if (isNaN(Number(id))) {
@@ -286,7 +280,7 @@ class UserController {
         }
       }
 
-      if (decoded.profile === "ADMIN") {
+      if (req.profile === "ADMIN") {
         const userUpdate: Partial<User> = {};
         const driverUpdate: Partial<Driver> = {};
 
@@ -303,15 +297,15 @@ class UserController {
           if (driver) {
             await this.userDriverRepository.update(driver.id, driverUpdate);
           }
-          res.status(200).json({ message: "Usuário atualizado com sucesso!", userUpdate, driverUpdate });
+          res.status(200).json({ message: "Usuário atualizado com sucesso!", userUpdate, driverUpdate, id });
           return
         }
 
-        res.status(200).json({ message: "Usuário atualizado com sucesso!", userUpdate });
+        res.status(200).json({ message: "Usuário atualizado com sucesso!", userUpdate, id });
         return
       }
 
-      if (decoded.profile === "DRIVER" && Number(decoded.userId) === Number(id)) {
+      if (req.profile === "DRIVER" && Number(req.userId) === Number(id)) {
         const driverUpdate: Partial<Driver> = {};
         const userUpdate: Partial<User> = {};
 
@@ -347,15 +341,7 @@ class UserController {
       const { status } = req.body;
 
       // Verificar token de autorização
-      const token = req.headers.authorization?.split(" ")[1];
-      if (!token) {
-        res.status(401).json({ message: "Token inválido!" });
-        return;
-      }
-
-      // Decodificar token
-      const decoded = jwt.verify(token, process.env.JWT_SECRET ?? "") as dataJwt;
-
+      
       // Verificar se o ID do usuário é válido
       if (isNaN(Number(id))) {
         res.status(400).json({ message: "ID inválido" });
@@ -378,7 +364,7 @@ class UserController {
         }
       }
 
-      if (decoded.profile === "ADMIN") {
+      if (req.profile === "ADMIN") {
         user.status = status;
         await this.userRepository.save(user);
         res.status(200).json({

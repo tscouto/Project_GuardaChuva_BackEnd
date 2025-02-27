@@ -32,7 +32,7 @@ class ProductController {
             const branch = await this.branchRepository.findOne({ where: { user_id: Number(req.userId) }, relations: ["user"] });
 
             if (!branch) {
-                res.status(404).json({ message: "Usuário não encontrado" });
+                res.status(404).json({ message: "Somente FILIAL pode cadastrar" });
                 return
             }
 
@@ -80,13 +80,22 @@ class ProductController {
     listProduct = async (req: Request, res: Response) => {
 
         try {
+
+
+            if (req.profile !== "BRANCH") {
+                return res.status(401).json({ message: "Somente usuário ADMIN pode acessar a rota" });
+            }
+
+            // Busca todos os produtos
             const listProducts = await this.productRepository.find({});
+
 
             if (listProducts.length === 0) {
                 return res.status(404).json({ message: "Nenhum produto encontrado." });
             }
 
-            return res.status(200).json(listProducts);
+            res.status(200).json(listProducts);
+            return
 
         } catch (error) {
             console.error(error);

@@ -1,1 +1,63 @@
 [27-02-2025 08:32:09.207 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:05:01.850 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:08:03.162 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:08:53.409 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:09:18.173 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:09:32.468 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:11:49.856 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:12:43.456 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:12:50.386 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:13:01.738 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:13:25.395 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:13:32.604 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:13:39.644 PM] error: 	Property "user" was not found in "Movements". Make sure your query is correct.
+[27-02-2025 11:14:54.483 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:15:06.326 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:15:28.769 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:15:49.795 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:16:07.003 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:17:40.666 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:17:58.322 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:18:12.606 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:19:41.834 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:19:48.954 PM] error: 	getaddrinfo EAI_FAIL tiago@email.com
+[27-02-2025 11:21:46.814 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:21:47.595 PM] error: 	getaddrinfo EAI_FAIL tiago@email.com
+[27-02-2025 11:24:36.816 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:25:27.164 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:29:17.443 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:29:31.425 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:31:49.006 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:32:07.894 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:32:19.457 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:32:27.995 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:32:43.774 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:33:54.226 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:34:43.599 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:35:59.213 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:39:13.899 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:39:37.990 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:40:43.957 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:41:12.878 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:41:39.778 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:41:46.078 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:42:22.071 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:42:48.481 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:42:55.668 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:43:07.631 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:43:29.765 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:43:31.364 PM] error: 	Cannot read properties of undefined (reading 'full_address')
+[27-02-2025 11:43:42.002 PM] error: 	Cannot read properties of undefined (reading 'full_address')
+[27-02-2025 11:45:46.013 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:46:02.721 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:46:12.724 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:46:27.157 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:47:03.726 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:47:13.405 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:47:24.664 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:48:40.636 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:50:02.532 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:51:14.255 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:52:17.957 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:52:35.376 PM] info: 	O servidor está rodando em http://localhost:3000
+[27-02-2025 11:53:35.701 PM] info: 	O servidor está rodando em http://localhost:3000

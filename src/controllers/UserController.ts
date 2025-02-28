@@ -48,6 +48,7 @@ import { Branch } from "../entities/Branches";
 import { Driver } from "../entities/Drivers";
 import { In } from "typeorm";
 import jwt, { JwtPayload } from "jsonwebtoken"
+import AppError from "../utils/AppError";
 
 type dataJwt = JwtPayload & { userId: string; roles: string[] };
 
@@ -63,52 +64,59 @@ class UserController {
     this.userDriverRepository = AppDataSource.getRepository(Driver);
   }
 
-  create = async (req: Request, res: Response) => {
+  create = async (req: Request, res: Response, next: NextFunction) => {
     try {
 
       const { name, email, profile, password_hash, document, full_address } = req.body;
 
       // Validação de campos obrigatórios
       if (!name || !email || !profile || !password_hash || !document) {
-        res.status(400).json({ error: "Todos os campos obrigatórios devem ser preenchidos." });
-        return
+        throw new AppError("Todos os campos obrigatórios devem ser preenchidos.", 400)
+        // res.status(400).json({ error: "Todos os campos obrigatórios devem ser preenchidos." });
+        // return
       }
 
       // Validação de email
       if (!isValidEmail(email)) {
-        res.status(400).json({ error: "Email inválido." });
-        return
+        throw new AppError("Email inválido.", 400)
+        // res.status(400).json({ error: "Email inválido." });
+        // return
       }
 
       // Validação do profile
       const validProfiles = ["DRIVER", "BRANCH", "ADMIN"];
       if (!validProfiles.includes(profile)) {
-        res.status(400).json({ error: "Perfil inválido. Valores permitidos: DRIVER, BRANCH ou ADMIN." });
-        return
+        throw new AppError("Perfil inválido. Valores permitidos: DRIVER, BRANCH ou ADMIN.", 400)
+        // res.status(400).json({ error: "Perfil inválido. Valores permitidos: DRIVER, BRANCH ou ADMIN." });
+        // return
       }
 
       // Validação da senha
       if (password_hash.length < 6 || password_hash.length > 20) {
-        res.status(400).json({ error: "A senha deve ter entre 6 e 20 caracteres." });
-        return
+        throw new AppError("A senha deve ter entre 6 e 20 caracteres.", 400)
+        // res.status(400).json({ error: "A senha deve ter entre 6 e 20 caracteres." });
+        // return
       }
 
       // Validação do documento (CPF ou CNPJ)
       if (profile === "DRIVER" && !cpf.isValid(document) || profile === "ADMIN" && !cpf.isValid(document)) {
-        res.status(400).json({ error: "CPF inválido." });
-        return
+        throw new AppError("CPF inválido.", 400)
+        // res.status(400).json({ error: "CPF inválido." });
+        // return
       }
 
       if (profile === "BRANCH" && !cnpj.isValid(document)) {
-        res.status(400).json({ error: "CNPJ inválido." });
-        return
+        throw new AppError("CNPJ inválido.", 400)
+        // res.status(400).json({ error: "CNPJ inválido." });
+        // return
       }
 
       // Verifica se o email já existe no banco
       const existingUser = await this.userRepository.findOne({ where: { email } });
       if (existingUser) {
-        res.status(400).json({ error: "Email já cadastrado." });
-        return
+        throw new AppError("Email já cadastrado.", 400)
+        // res.status(400).json({ error: "Email já cadastrado." });
+        // return
       }
 
       // Hash da senha
@@ -157,13 +165,14 @@ class UserController {
 
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: "Erro interno do servidor." });
+
+      next(error)
       return
     }
   };
 
 
-  listaUsuarios = async (req: Request, res: Response) => {
+  listaUsuarios = async (req: Request, res: Response, next: NextFunction) => {
 
     try {
       let profileFilter = req.query.profile
@@ -193,9 +202,9 @@ class UserController {
       const combinedResults = [...users, ...branches, ...drivers];
 
       res.status(200).json(combinedResults);
-    } catch (ex) {
-      console.error(ex);
-      res.status(500).send("Ocorreu um erro ao executar a solicitação");
+    } catch (error) {
+      console.error(error);
+      next(error)
     }
   }
   listUsarioId = async (req: Request, res: Response, next: NextFunction) => {
@@ -241,8 +250,8 @@ class UserController {
       res.status(403).json({ message: "Acesso negado" }); // Se não for ADMIN ou DRIVER válido
 
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Erro ao processar requisição" });
+      console.log(error)
+      next(error)
     }
 
 
@@ -329,19 +338,18 @@ class UserController {
 
       res.status(403).json({ message: "Acesso negado" });
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Erro ao processar requisição" });
-      return
+      console.log(error)
+      next(error)
     }
 
   }
-  updateStatusUsuario = async (req: Request, res: Response) => {
+  updateStatusUsuario = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { id } = req.params;
       const { status } = req.body;
 
       // Verificar token de autorização
-      
+
       // Verificar se o ID do usuário é válido
       if (isNaN(Number(id))) {
         res.status(400).json({ message: "ID inválido" });
@@ -383,9 +391,9 @@ class UserController {
 
       res.status(403).json({ message: "Acesso negado" });
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Erro ao processar requisição" });
-      return;
+      console.log(error)
+      next(error)
+
     }
   };
 

@@ -32,20 +32,23 @@ class ProductController {
             const branch = await this.branchRepository.findOne({ where: { user_id: Number(req.userId) }, relations: ["user"] });
 
             if (!branch) {
-                res.status(404).json({ message: "Somente FILIAL pode cadastrar" });
-                return
+                throw new AppError("Somente FILIAL pode cadastrar.", 404)
+                // res.status(404).json({ message: "Somente FILIAL pode cadastrar" });
+                // return
             }
 
 
 
             if (!name || !amount || !description) {
-                res.status(400).json({ error: "Todos os campos obrigatórios devem ser preenchidos." });
-                return
+                throw new AppError("Todos os campos obrigatórios devem ser preenchidos.", 404)
+                // res.status(400).json({ error: "Todos os campos obrigatórios devem ser preenchidos." });
+                // return
             }
 
             if (amount <= 0) {
-                res.status(400).json({ error: "'amount' deve ser um número positivo." });
-                return
+                throw new AppError("amount' deve ser um número positivo.", 400)
+                // res.status(400).json({ error: "'amount' deve ser um número positivo." });
+                // return
             }
 
             // Criando o produto
@@ -72,18 +75,18 @@ class ProductController {
             return
 
         } catch (error) {
-            console.error(error);
-            res.status(500).json({ message: "Erro ao processar requisição" });
-            return
+            console.log(error)
+            next(error)
         }
     };
-    listProduct = async (req: Request, res: Response) => {
+    listProduct = async (req: Request, res: Response, next:NextFunction) => {
 
         try {
 
 
             if (req.profile !== "BRANCH") {
-                return res.status(401).json({ message: "Somente usuário ADMIN pode acessar a rota" });
+                throw new AppError("Somente usuário ADMIN pode acessar a rota", 401)
+                // return res.status(401).json({ message: "Somente usuário ADMIN pode acessar a rota" });
             }
 
             // Busca todos os produtos
@@ -91,15 +94,16 @@ class ProductController {
 
 
             if (listProducts.length === 0) {
-                return res.status(404).json({ message: "Nenhum produto encontrado." });
+                throw new AppError("Nenhum produto encontrado.", 404)
+                // return res.status(404).json({ message: "Nenhum produto encontrado." });
             }
 
             res.status(200).json(listProducts);
             return
 
         } catch (error) {
-            console.error(error);
-            return res.status(500).json({ message: "Erro ao processar requisição" });
+            console.log(error)
+            next(error)
         }
     }
 

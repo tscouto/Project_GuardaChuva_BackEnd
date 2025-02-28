@@ -6,6 +6,7 @@ import { Movements } from "../entities/Movements";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { User } from "../entities/User";
 import logger from "../config/winston";
+import AppError from "../utils/AppError";
 
 
 type dataJwt = JwtPayload & { userId: number; };
@@ -30,8 +31,9 @@ class MovementsController {
 
             // 🔹 Buscar a filial de origem baseada no usuário autenticado
             if (req.profile !== "BRANCH") {
-                res.status(401).json({ message: "Somente usuário BRANCH pode acessar a rota" });
-                return;
+                throw new AppError("Somente usuário BRANCH pode acessar a rota", 401)
+                // res.status(401).json({ message: "Somente usuário BRANCH pode acessar a rota" });
+                // return;
             }
 
             const branch = await this.branchRepository.findOne({
@@ -40,19 +42,22 @@ class MovementsController {
             });
 
             if (!branch) {
-                res.status(404).json({ message: "Filial de origem não encontrada" });
-                return;
+                throw new AppError("Filial de origem não encontrada", 404)
+                // res.status(404).json({ message: "Filial de origem não encontrada" });
+                // return;
             }
 
             // 🔹 Validação dos dados recebidos
             if (!product_id || !destination_branch_id || !quantity) {
-                res.status(400).json({ message: "Todos os campos são obrigatórios" });
-                return;
+                throw new AppError("Todos os campos são obrigatórios", 400)
+                // res.status(400).json({ message: "Todos os campos são obrigatórios" });
+                // return;
             }
 
             if (quantity <= 0) {
-                res.status(400).json({ message: "A quantidade deve ser maior que zero" });
-                return;
+                throw new AppError("A quantidade deve ser maior que zero", 400)
+                // res.status(400).json({ message: "A quantidade deve ser maior que zero" });
+                // return;
             }
 
             // 🔹 Verificar se a filial de destino existe
@@ -61,14 +66,16 @@ class MovementsController {
             });
 
             if (!destinationBranch) {
-                res.status(404).json({ message: "Filial de destino não encontrada" });
-                return;
+                throw new AppError("Filial de destino não encontrada", 404)
+                // res.status(404).json({ message: "Filial de destino não encontrada" });
+                // return;
             }
 
             // 🔹 Verificar se a filial de origem e destino são diferentes
             if (Number(branch.id) === Number(destination_branch_id)) {
-                res.status(400).json({ message: "A filial de origem não pode ser a mesma que a filial de destino" });
-                return;
+                throw new AppError("A filial de origem não pode ser a mesma que a filial de destino", 400)
+                // res.status(400).json({ message: "A filial de origem não pode ser a mesma que a filial de destino" });
+                // return;
             }
 
             // 🔹 Buscar o produto e verificar se pertence à filial de origem
@@ -77,14 +84,16 @@ class MovementsController {
             });
 
             if (!product) {
-                res.status(404).json({ message: "Produto não encontrado na filial de origem" });
-                return;
+                throw new AppError("Produto não encontrado na filial de origem", 404)
+                // res.status(404).json({ message: "Produto não encontrado na filial de origem" });
+                // return;
             }
 
             // 🔹 Verificar se a quantidade solicitada está disponível
             if (product.amount < quantity) {
-                res.status(400).json({ message: "Estoque insuficiente para essa movimentação" });
-                return;
+                throw new AppError("Estoque insuficiente para essa movimentação", 400)
+                // res.status(400).json({ message: "Estoque insuficiente para essa movimentação" });
+                // return;
             }
 
             // 🔹 Criar a movimentação com status PENDING
@@ -117,33 +126,36 @@ class MovementsController {
             next(error); // 🔹 Encaminha o erro para o middleware de tratamento de erros
         }
     };
-    listMovements = async (req: Request, res: Response) => {
+    listMovements = async (req: Request, res: Response, next: NextFunction) => {
         try {
             if (!req.profile || (req.profile !== "BRANCH" && req.profile !== "DRIVER")) {
-                res.status(401).json({ message: "Somente usuário BRANCH ou DRIVER pode acessar a rota" });
-                return;
+                throw new AppError("Somente usuário BRANCH ou DRIVER pode acessar a rota", 401)
+                // res.status(401).json({ message: "Somente usuário BRANCH ou DRIVER pode acessar a rota" });
+                // return;
             }
 
             const userId = Number(req.userId);
             if (isNaN(userId)) {
-                res.status(400).json({ message: "ID do usuário inválido" });
-                return;
+                throw new AppError("ID do usuário inválido", 400)
+                // res.status(400).json({ message: "ID do usuário inválido" });
+                // return;
             }
 
             const branch = await this.branchRepository.findOne({ where: { id: userId } });
             const user = await this.userRepository.findOne({ where: { id: userId } });
 
             if (!branch && !user) {
-                res.status(404).json({ message: "Usuário ou filial não encontrado" });
-                return;
+                throw new AppError("Usuário ou filial não encontrado", 404)
+                // res.status(404).json({ message: "Usuário ou filial não encontrado" });
+                // return;
             }
 
             const movements = await this.movementsRepository.find();
             res.status(200).json(movements); // ✅ Apenas chamar res.status().json()
 
         } catch (error) {
-            console.error(error);
-            res.status(500).json({ message: "Erro ao processar requisição" });
+            console.log(error)
+            next(error)
         }
 
     }
@@ -154,31 +166,36 @@ class MovementsController {
             const status: StatusType = "IN_PROGRESS";
 
             if (req.profile !== "DRIVER") {
-                res.status(401).json({ message: "Somente usuário DRIVER pode acessar a rota" });
-                return;
+                throw new AppError("Somente usuário DRIVER pode acessar a rota", 401)
+                // res.status(401).json({ message: "Somente usuário DRIVER pode acessar a rota" });
+                // return;
             }
 
             const movementId = Number(req.params.id); // Pegando ID da movimentação
             if (!movementId) {
-                res.status(400).json({ message: "ID da movimentação é obrigatório" });
-                return;
+                throw new AppError("ID da movimentação é obrigatório", 400)
+                // res.status(400).json({ message: "ID da movimentação é obrigatório" });
+                // return;
             }
 
             // 🔹 Buscar a movimentação
             const movement = await this.movementsRepository.findOne({ where: { id: movementId } });
             if (!movement) {
-                res.status(404).json({ message: "Movimentação não encontrada" });
-                return;
+                throw new AppError("Movimentação não encontrada", 404)
+                // res.status(404).json({ message: "Movimentação não encontrada" });
+                // return;
             }
 
             if (movement.status === "IN_PROGRESS") {
-                res.status(400).json({ message: "Status da movimentação já está IN_PROGRESS" });
-                return;
+                throw new AppError("Status da movimentação já está IN_PROGRESS", 400)
+                // res.status(400).json({ message: "Status da movimentação já está IN_PROGRESS" });
+                // return;
             }
 
             if (movement.status === "FINISHED") {
-                res.status(400).json({ message: "Essa movimentação já está FINISHED" });
-                return;
+                throw new AppError("Essa movimentação já está FINISHED", 400)
+                // res.status(400).json({ message: "Essa movimentação já está FINISHED" });
+                // return;
             }
 
 
@@ -209,15 +226,16 @@ class MovementsController {
 
 
 
-    updateFinish = async (req: Request, res: Response) => {
+    updateFinish = async (req: Request, res: Response, next: NextFunction) => {
         try {
             type StatusType = "FINISHED";
             const status: StatusType = "FINISHED";
 
             const movementId = Number(req.params.id);
             if (isNaN(movementId)) {
-                res.status(400).json({ message: "ID da movimentação é obrigatório e deve ser um número válido" });
-                return
+                throw new AppError("ID da movimentação é obrigatório e deve ser um número válido", 400)
+                // res.status(400).json({ message: "ID da movimentação é obrigatório e deve ser um número válido" });
+                // return
             }
 
             // Buscar a movimentação
@@ -229,18 +247,21 @@ class MovementsController {
             console.log(movement)
 
             if (!movement) {
-                res.status(404).json({ message: "Movimentação não encontrada" });
-                return
+                throw new AppError("Movimentação não encontrada", 404)
+                // res.status(404).json({ message: "Movimentação não encontrada" });
+                // return
             }
 
             if (movement.status === "FINISHED") {
-                res.status(400).json({ error: "Movimentação já finalizada" });
-                return
+                throw new AppError("Movimentação já finalizada", 400)
+                // res.status(400).json({ error: "Movimentação já finalizada" });
+                // return
             }
 
             if (movement.driver_id !== req.userId) {
-                res.status(403).json({ message: "Você não tem permissão para finalizar esta movimentação" });
-                return
+                throw new AppError("Você não tem permissão para finalizar esta movimentação", 403)
+                // res.status(403).json({ message: "Você não tem permissão para finalizar esta movimentação" });
+                // return
             }
 
             // Atualizar o status
@@ -279,8 +300,8 @@ class MovementsController {
             return
 
         } catch (error) {
-            console.error("Erro ao atualizar status da movimentação:", error);
-            res.status(500).json({ message: "Erro interno do servidor" });
+            console.log(error)
+            next(error)
         }
     }
 }

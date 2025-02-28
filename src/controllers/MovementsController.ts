@@ -7,6 +7,7 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 import { User } from "../entities/User";
 import logger from "../config/winston";
 import AppError from "../utils/AppError";
+import SendEmail from "../utils/Send";
 
 
 type dataJwt = JwtPayload & { userId: number; };
@@ -180,6 +181,7 @@ class MovementsController {
 
             // 🔹 Buscar a movimentação
             const movement = await this.movementsRepository.findOne({ where: { id: movementId } });
+
             if (!movement) {
                 throw new AppError("Movimentação não encontrada", 404)
                 // res.status(404).json({ message: "Movimentação não encontrada" });
@@ -204,8 +206,33 @@ class MovementsController {
 
             // 🔹 Buscar novamente a movimentação para retornar os dados atualizados
             const updatedMovement = await this.movementsRepository.findOne({ where: { id: movementId }, relations: ["product"] });
-            logger.info(updatedMovement);
+            const sendProduct = await this.movementsRepository.findOne({
+                where: { id: movementId },
+                relations: ["product", "driver", "destinationBranch", "destinationBranch.user"]
+            });
 
+            if (!sendProduct?.destinationBranch?.user?.email) {
+                throw new AppError("Usuário responsável pela filial de destino não possui um e-mail cadastrado", 400);
+            }
+
+            // 🔹 Enviar o e-mail automaticamente para o responsável da filial destino
+            // const sendMail = new SendEmail();
+            // await sendMail.send(
+            //     sendProduct.destinationBranch.user.email,
+            //     "Produto saiu do local sentido à FILIAL DESTINATÁRIO",
+            //     sendProduct.product.name
+            // );
+
+
+            // 🔹 Simulando o envio do e-mail, sem realmente enviar
+            const simulatedEmailResponse = {
+                message: "Produto saiu agora do local sentido à FILIAL DESTINATÁRIO",
+                productName: sendProduct.product.name,
+                destinationBranch: sendProduct.destinationBranch.full_address,
+                recipientEmail: sendProduct.destinationBranch.user.email  // Simulação de e-mail
+            };
+
+            // Aqui, em vez de enviar o e-mail real, retornamos a simulação no JSON
             res.status(200).json({
                 id: updatedMovement?.id,
                 destination_branch_id: updatedMovement?.destination_branch_id,
@@ -215,6 +242,7 @@ class MovementsController {
                 status: updatedMovement?.status,
                 created_at: updatedMovement?.created_at,
                 updated_at: updatedMovement?.updated_at,
+                emailInfo: simulatedEmailResponse  // Informação simulada sobre o e-mail
             });
 
         } catch (error) {
@@ -296,7 +324,37 @@ class MovementsController {
 
             // Buscar novamente a movimentação para retornar os dados atualizados
             const showUpdate = await this.movementsRepository.findOne({ where: { id: Number(movement.id) }, relations: ["product"] })
-            res.status(200).json(showUpdate);
+            const sendProduct = await this.movementsRepository.findOne({
+                where: { id: movementId },
+                relations: ["product", "driver", "destinationBranch", "destinationBranch.user"]
+            });
+
+            if (!sendProduct?.destinationBranch?.user?.email) {
+                throw new AppError("Usuário responsável pela filial de destino não possui um e-mail cadastrado", 400);
+            }
+
+
+             // 🔹 Enviar o e-mail automaticamente para o responsável da filial destino
+            // const sendMail = new SendEmail();
+            // await sendMail.send(
+            //     sendProduct.destinationBranch.user.email,
+            //     "Produto saiu do local sentido à FILIAL DESTINATÁRIO",
+            //     sendProduct.product.name
+            // );
+
+            const simulatedEmailResponse = {
+                message: "Produto CHEGOU na FILIAL DESTINATARIO",
+                productName: sendProduct.product.name,
+                destinationBranch: sendProduct.destinationBranch.full_address,
+                recipientEmail: sendProduct.destinationBranch.user.email  // Simulação de e-mail
+            };
+
+            const response = {
+                ...showUpdate,  // Inclui todos os dados de showUpdate
+                emailInfo: simulatedEmailResponse  // Adiciona as informações do e-mail simulado
+            };
+
+            res.status(200).json(response)
             return
 
         } catch (error) {

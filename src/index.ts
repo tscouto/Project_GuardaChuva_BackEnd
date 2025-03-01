@@ -26,7 +26,6 @@ app.use(express.json()); // Permite que o express '''entenda JSON
 // rotas de usuarios
 app.use("/users", userRouter);
 app.use("/login", authRouter);
-app.use('/list', userRouter)
 app.use('/list/:id', userRouter)
 app.use('/user', userRouter);
 

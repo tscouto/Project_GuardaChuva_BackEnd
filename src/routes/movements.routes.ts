@@ -15,5 +15,5 @@ movementsRouter.get("/", verifyTokenEnabled, movementsControler.listMovements)
 
 movementsRouter.patch("/status/:id", verifyTokenEnabled, movementsControler.updateStatusMovements)
 
-movementsRouter.patch("/end/:id", verifyTokenEnabled , movementsControler.updateFinish)
+movementsRouter.patch("/end/:id", verifyTokenEnabled, movementsControler.updateFinish)
 export default movementsRouter;

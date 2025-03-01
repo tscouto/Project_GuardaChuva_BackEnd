@@ -49,6 +49,7 @@ import { Driver } from "../entities/Drivers";
 import { In } from "typeorm";
 import jwt, { JwtPayload } from "jsonwebtoken"
 import AppError from "../utils/AppError";
+import SendEmail from "../utils/Send";
 
 type dataJwt = JwtPayload & { userId: string; roles: string[] };
 
@@ -158,9 +159,16 @@ class UserController {
 
 
       }
-      console.log(createdProfile, newUser)
+      const sendMail = new SendEmail();
+      await sendMail.sendUser(
+        newUser.email, // O email do destinatário
+        "Bem-vindo à nossa plataforma!", // O assunto do e-mail
+        newUser.name // O nome do usuário
+      );
+
       res.status(201).json(createdProfile || newUser)
       return
+
 
 
     } catch (error) {

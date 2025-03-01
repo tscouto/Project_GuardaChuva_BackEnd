@@ -206,6 +206,7 @@ class MovementsController {
 
             // 🔹 Buscar novamente a movimentação para retornar os dados atualizados
             const updatedMovement = await this.movementsRepository.findOne({ where: { id: movementId }, relations: ["product"] });
+
             const sendProduct = await this.movementsRepository.findOne({
                 where: { id: movementId },
                 relations: ["product", "driver", "destinationBranch", "destinationBranch.user"]
@@ -216,21 +217,21 @@ class MovementsController {
             }
 
             // 🔹 Enviar o e-mail automaticamente para o responsável da filial destino
-            // const sendMail = new SendEmail();
-            // await sendMail.send(
-            //     sendProduct.destinationBranch.user.email,
-            //     "Produto saiu do local sentido à FILIAL DESTINATÁRIO",
-            //     sendProduct.product.name
-            // );
-
-
+            const sendMail = new SendEmail();
+            await sendMail.send(
+                sendProduct.destinationBranch.user.email,
+                "Produto saiu do local sentido à FILIAL DESTINATÁRIO",
+                sendProduct.product.name,
+                sendProduct.destinationBranch.user.name,
+                "saindo" // Adicione o status aqui
+            );
             // 🔹 Simulando o envio do e-mail, sem realmente enviar
-            const simulatedEmailResponse = {
-                message: "Produto saiu agora do local sentido à FILIAL DESTINATÁRIO",
-                productName: sendProduct.product.name,
-                destinationBranch: sendProduct.destinationBranch.full_address,
-                recipientEmail: sendProduct.destinationBranch.user.email  // Simulação de e-mail
-            };
+            // const simulatedEmailResponse = {
+            //     message: "Produto saiu agora do local sentido à FILIAL DESTINATÁRIO",
+            //     productName: sendProduct.product.name,
+            //     destinationBranch: sendProduct.destinationBranch.full_address,
+            //     recipientEmail: sendProduct.destinationBranch.user.email  // Simulação de e-mail
+            // };
 
             // Aqui, em vez de enviar o e-mail real, retornamos a simulação no JSON
             res.status(200).json({
@@ -242,7 +243,7 @@ class MovementsController {
                 status: updatedMovement?.status,
                 created_at: updatedMovement?.created_at,
                 updated_at: updatedMovement?.updated_at,
-                emailInfo: simulatedEmailResponse  // Informação simulada sobre o e-mail
+                // emailInfo: simulatedEmailResponse  // Informação simulada sobre o e-mail
             });
 
         } catch (error) {
@@ -334,27 +335,29 @@ class MovementsController {
             }
 
 
-             // 🔹 Enviar o e-mail automaticamente para o responsável da filial destino
-            // const sendMail = new SendEmail();
-            // await sendMail.send(
-            //     sendProduct.destinationBranch.user.email,
-            //     "Produto saiu do local sentido à FILIAL DESTINATÁRIO",
-            //     sendProduct.product.name
-            // );
+            // 🔹 Enviar o e-mail automaticamente para o responsável da filial destino
+            const sendMail = new SendEmail();
+            await sendMail.send(
+                sendProduct.destinationBranch.user.email,
+                "Produto saiu do local sentido à FILIAL DESTINATÁRIO",
+                sendProduct.product.name,
+                sendProduct.destinationBranch.user.name,
+                "chegou" // Adicione o status aqui
+            );
 
-            const simulatedEmailResponse = {
-                message: "Produto CHEGOU na FILIAL DESTINATARIO",
-                productName: sendProduct.product.name,
-                destinationBranch: sendProduct.destinationBranch.full_address,
-                recipientEmail: sendProduct.destinationBranch.user.email  // Simulação de e-mail
-            };
+            // const simulatedEmailResponse = {
+            //     message: "Produto CHEGOU na FILIAL DESTINATARIO",
+            //     productName: sendProduct.product.name,
+            //     destinationBranch: sendProduct.destinationBranch.full_address,
+            //     recipientEmail: sendProduct.destinationBranch.user.email  // Simulação de e-mail
+            // };
 
-            const response = {
-                ...showUpdate,  // Inclui todos os dados de showUpdate
-                emailInfo: simulatedEmailResponse  // Adiciona as informações do e-mail simulado
-            };
+            // const response = {
+            //     ...showUpdate,  // Inclui todos os dados de showUpdate
+            //     emailInfo: simulatedEmailResponse  // Adiciona as informações do e-mail simulado
+            // };
 
-            res.status(200).json(response)
+            res.status(200).json(showUpdate)
             return
 
         } catch (error) {

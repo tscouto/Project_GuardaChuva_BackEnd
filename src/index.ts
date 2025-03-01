@@ -30,7 +30,6 @@ app.use('/users/:id', userRouter)
 
 
 //rotas de produtos
-app.use('/product', productRouter)
 app.use('/products', productRouter)
 
 //rotas de movimentações

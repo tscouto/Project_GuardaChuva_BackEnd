@@ -169,8 +169,6 @@ class UserController {
       res.status(201).json(createdProfile || newUser)
       return
 
-
-
     } catch (error) {
       console.error(error);
 

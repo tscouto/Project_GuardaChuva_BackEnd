@@ -2,13 +2,9 @@
 
 ## 1. Introdução
 
-A **Multinacional Guarda-Chuva Farmácias** está entusiasmada com o protótipo do app desenvolvido e agora, com grande expectativa, convida você a participar da próxima fase desse projeto inovador.
+A **Multinacional Guarda-Chuva Farmácias** está avançando para a próxima fase do desenvolvimento de seu sistema interno de logística. Para isso, está implementando o **Praying Mantis**, uma API RESTful de backend projetada para otimizar a gestão de usuários, produtos e movimentações entre suas filiais.
 
-Após o sucesso do protótipo do app, queremos avançar para a criação do protótipo do backend, que será fundamental para otimizar a gestão das movimentações de produtos entre as filiais da organização. Este novo passo envolve um **API Restful** que dará suporte à integração das funcionalidades do app.
-
-O backend será responsável por processar dados e possibilitar o gerenciamento de usuários, produtos e movimentações.
-
-Se você está pronto para contribuir com essa etapa crucial e ajudar a transformar ainda mais o nosso setor, junte-se a nós no desenvolvimento do protótipo do backend desse projeto inovador!
+Com uma arquitetura robusta e escalável, essa solução aprimorará a eficiência operacional, garantindo maior controle, rastreabilidade e agilidade no transporte de medicamentos.
 
 ---
 
@@ -31,48 +27,6 @@ Se você está pronto para contribuir com essa etapa crucial e ajudar a transfor
 
 #### Estrutura da Tabela `users` (Migração necessária):
 
-<<<<<<< HEAD
-| Campo           | Tipo                     | Descrição                     |
-|-----------------|--------------------------|-------------------------------|
-| `id`            | PK                      | Chave primária                |
-| `name`          | varchar(200) NOT NULL    | Nome do usuário               |
-| `profile`       | ENUM('DRIVER', 'BRANCH', 'ADMIN') NOT NULL | Perfil do usuário |
-| `email`         | varchar(150) UNIQUE NOT NULL | Email do usuário          |
-| `password_hash` | varchar(150) NOT NULL    | Hash da senha                 |
-| `status`        | boolean (default: TRUE)  | Status do usuário             |
-| `created_at`    | Timestamp (default now())| Data de criação               |
-| `updated_at`    | Timestamp (default now())| Data de atualização           |
-
-#### Estrutura da Tabela `branches` (Migração necessária):
-
-| Campo           | Tipo                     | Descrição                     |
-|-----------------|--------------------------|-------------------------------|
-| `id`            | PK                      | Chave primária                |
-| `full_address`  | varchar(255)             | Endereço completo             |
-| `document`      | varchar(30) NOT NULL     | CNPJ da filial                |
-| `user_id`       | FK com tabela `users` NOT NULL | Relação com usuário     |
-| `created_at`    | Timestamp (default now())| Data de criação               |
-| `updated_at`    | Timestamp (default now())| Data de atualização           |
-
-#### Estrutura da Tabela `drivers` (Migração necessária):
-
-| Campo           | Tipo                     | Descrição                     |
-|-----------------|--------------------------|-------------------------------|
-| `id`            | PK                      | Chave primária                |
-| `full_address`  | varchar(255)             | Endereço completo             |
-| `document`      | varchar(30) NOT NULL     | CPF do motorista              |
-| `user_id`       | FK com tabela `users` NOT NULL | Relação com usuário     |
-| `created_at`    | Timestamp (default now())| Data de criação               |
-| `updated_at`    | Timestamp (default now())| Data de atualização           |
-
-#### Middleware:
-Desenvolver middleware para verificar se o usuário é do perfil `ADMIN`. Apenas usuários com perfil `ADMIN` devem ter permissão para acessar esta rota.
-
-#### Controller:
-Ao salvar um novo usuário, a senha deve ser armazenada como um hash. Ao salvar o usuário, lembre-se de salvar os demais dados na tabela `branches` ou `drivers`, dependendo do perfil do usuário.
-
-#### Retornos da Rota:
-=======
 | Campo           | Tipo                                       | Descrição           |
 | --------------- | ------------------------------------------ | ------------------- |
 | `id`            | PK                                         | Chave primária      |
@@ -116,7 +70,6 @@ Ao salvar um novo usuário, a senha deve ser armazenada como um hash. Ao salvar 
 
 #### Retornos da Rota:
 
->>>>>>> feature/terceiroRequisito
 - **Sucesso (201):** Retornar o nome do usuário criado e o perfil na resposta da requisição.
 - **Conflito (409):** Retornar quando o email já está cadastrado.
 - **Erro (400):** Retornar quando dados incorretos são enviados no corpo da requisição.
@@ -191,28 +144,6 @@ Atenção à distribuição dos dados entre as tabelas de usuários e filial/mot
 - **Path:** `/products` (Privada e somente FILIAL)
 - **Campos no corpo da requisição (Body):**
   - `name`: Obrigatório
-<<<<<<< HEAD
-  - `amount`: Obrigatório 
-  - `description`: Obrigatório 
-  - `url_cover`: Opcional
-- **Estrutura da Tabela `products` (Migração necessária):**
-
-| Campo           | Tipo                     | Descrição                     |
-|-----------------|--------------------------|-------------------------------|
-| `id`            | PK                      | Chave primária                |
-| `name`          | VARCHAR(200) NOT NULL    | Nome do produto               |
-| `amount`        | INT NOT NULL             | Quantidade do produto         |
-| `description`   | VARCHAR(200) NOT NULL    | Descrição do produto          |
-| `url_cover`     | VARCHAR(200)             | URL da imagem do produto      |
-| `branch_id`     | FK com tabela `branches` NOT NULL | Relação com filial |
-| `created_at`    | TIMESTAMP                | Data de criação               |
-| `updated_at`    | TIMESTAMP                | Data de atualização           |
-
-#### Controller:
-Antes de salvar o produto, obtenha o ID da filial a partir do ID do usuário e associe-o ao campo `branch_id`. Lembre-se de que o usuário está vinculado a uma filial, portanto, o ID que deve ser vinculado é o da filial, e não o do usuário. O ID do usuário serve apenas como uma referência para localizar o ID da filial.
-
-#### Retornos da Rota:
-=======
   - `amount`: Obrigatório
   - `description`: Obrigatório
   - `url_cover`: Opcional
@@ -235,7 +166,6 @@ Antes de salvar o produto, obtenha o ID da filial a partir do ID do usuário e a
 
 #### Retornos da Rota:
 
->>>>>>> feature/terceiroRequisito
 - **Sucesso (201):** Retornar o produto criado.
 - **Erro (400):** Retornar quando dados incorretos são enviados no corpo da requisição.
 
@@ -256,23 +186,6 @@ Antes de salvar o produto, obtenha o ID da filial a partir do ID do usuário e a
 - **Path:** `/movements/` (Privada, acessível somente por FILIAL)
 - **Campos no corpo da requisição (Body):**
   - `destination_branch_id`: Obrigatório
-<<<<<<< HEAD
-  - `product_id`: Obrigatório 
-  - `quantity`: Obrigatório (Deve ser superior a 0 e não ultrapassar o máximo disponível na coluna `amount` do produto)
-- **Estrutura da Tabela `movements` (Migração necessária):**
-
-| Campo                 | Tipo                     | Descrição                     |
-|-----------------------|--------------------------|-------------------------------|
-| `id`                  | PK                      | Chave primária                |
-| `destination_branch_id` | FK da tabela `branches` NOT NULL | Filial de destino |
-| `product_id`          | FK para tabela de produtos NOT NULL | Produto movimentado |
-| `quantity`            | INT NOT NULL             | Quantidade movimentada        |
-| `status`              | ENUM('PENDING', 'IN_PROGRESS', 'FINISHED') DEFAULT 'PENDING' | Status da movimentação |
-| `created_at`          | TIMESTAMP                | Data de criação               |
-| `updated_at`          | TIMESTAMP                | Data de atualização           |
-
-#### Controller:
-=======
   - `product_id`: Obrigatório
   - `quantity`: Obrigatório (Deve ser superior a 0 e não ultrapassar o máximo disponível na coluna `amount` do produto)
 - **Estrutura da Tabela `movements` (Migração necessária):**
@@ -289,17 +202,13 @@ Antes de salvar o produto, obtenha o ID da filial a partir do ID do usuário e a
 
 #### Controller:
 
->>>>>>> feature/terceiroRequisito
 1. Verificar se a quantidade (`quantity`) solicitada é inferior ou igual ao estoque disponível da filial de origem. Se não houver estoque suficiente, retorna um erro `400` com a mensagem "Estoque insuficiente para essa movimentação".
 2. O `destination_branch_id` e o `id` da filial do produto devem ser diferentes. Se forem iguais, retornar um erro `400` com a mensagem "A filial de origem não pode ser a mesma que a filial de destino".
 3. Após a verificação de estoque, o produto deve ser atualizado na filial de origem, subtraindo a quantidade movimentada.
 4. O status de uma nova movimentação será, por padrão, `PENDING`. Não é necessário informá-lo no corpo da requisição ao cadastrar, pois o valor será automaticamente atribuído com base no valor padrão definido na migração.
 
 #### Retornos da Rota:
-<<<<<<< HEAD
-=======
 
->>>>>>> feature/terceiroRequisito
 - **Sucesso (201):** Retorna a movimentação criada.
 - **Erro (400):** Retorna quando há estoque insuficiente ou filial de origem e destino são iguais.
 
@@ -339,11 +248,7 @@ Antes de salvar o produto, obtenha o ID da filial a partir do ID do usuário e a
 1. **Clone o repositório:**
    ```bash
    git clone https://github.com/DEVinHouse-Clamed-V3/Projeto_GuardaChuva__BackEnd.git
-<<<<<<< HEAD
-
-=======
    ```
->>>>>>> feature/terceiroRequisito
 
 # Awesome Project Build with TypeORM
 
@@ -352,11 +257,8 @@ Steps to run this project:
 1. Run `npm i` command
 2. Setup database settings inside `.env` file
 3. Run `npm start:dev` command
-<<<<<<< HEAD
-=======
 
 # Observação:
 
 Eu tinha feito repositorio com a no devinhouse Clamed, porém tive que deletar e criei nesse particular.
 Então o requisito 1 e o requisito 2 já foram finalizados e irá ser a partir do terceiro requisito.
->>>>>>> feature/terceiroRequisito

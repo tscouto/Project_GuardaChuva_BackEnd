@@ -1,4 +1,4 @@
-# 🕷️ Praying Mantis - Backend da Guarda-Chuva Farmácias
+# 🦗 Praying Mantis - Backend da Guarda-Chuva Farmácias
 
 ## 1. Introdução
 
